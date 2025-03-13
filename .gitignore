@@ -33,3 +33,5 @@
 
 #Carpeta build
 build/
+#Carpeta CMAKE
+CMakeFiles
