@@ -6,7 +6,7 @@
  * This is an example, change it for your specific problem.
  *
  */
-typedef float tFitness;
+typedef double tFitness;
 
 /**
  * Domain of each element
