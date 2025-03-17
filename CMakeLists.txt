@@ -7,4 +7,4 @@ file(GLOB C_SOURCES
 )
 INCLUDE_DIRECTORIES("common" "inc")
 
-ADD_EXECUTABLE(main "main.cpp" ${C_SOURCES})
+ADD_EXECUTABLE(main "src/main.cpp" ${C_SOURCES})
