@@ -50,7 +50,7 @@ using namespace std;
     }
 
     tFitness Mindiff::fitness(const tSolution &solution){
-       double dis;
+       double dis_max,dis_min,dis;
        distancia.first = 0;
        distancia.second = 0;
        dis = 0;
@@ -79,7 +79,7 @@ using namespace std;
     }
 
     size_t Mindiff::getSolutionSize(const tSolution &solution){
-        return solution.size();
+        return m;
     }
 
     pair<tDomain, tDomain> Mindiff::getSolutionDomainRange(){

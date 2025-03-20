@@ -40,7 +40,7 @@ class Mindiff : public Problem{
         /**
         * Return the current size of the solution.
         */
-        size_t getSolutionSize() override;
+        size_t getSolutionSize(const tSolution &solution);
         /** Return the range of domain of each element of the solution */
         pair<tDomain, tDomain> getSolutionDomainRange() override;
     
