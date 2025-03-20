@@ -6,6 +6,9 @@ class Mindiff : public Problem{
     private:
         int n;
         int m;
+        vector<int> puntos;
+        pair<double,double> distancia;
+
 
         double **matriz;
     public:
@@ -15,19 +18,21 @@ class Mindiff : public Problem{
         * Evaluate the solution from scratch.
         * @param solution to evaluate.
         */
-        tFitness fitness(const tSolution &solution) override;
-            /**
-         * Evaluate the solution indicating the current position to change and the new
-         * value.
-         *
-         * By default it run the previous one. However, it can be override to
-         * factorize the fitness.
-         *
-         * @param solution to evaluate.
-         * @param pos_previous position of the solution to change.
-         * @param new_value.
-         */
-        tFitness fitness(const tSolution &solution, unsigned pos_previous,tDomain new_value) override;
+       tFitness fitness(const tSolution &solution) = 0;
+       /**
+        * Evaluate the solution indicating the current position to change and the new
+        * value.
+        *
+        * By default it run the previous one. However, it can be override to
+        * factorize the fitness.
+        *
+        * @param solution to evaluate.
+        * @param solution_info information of solution to calculate the factored
+        * fitness.
+        * @param pos_change position of the solution to change.
+        * @param new_value to store in pos_previous.
+        */
+       virtual tFitness fitness(const tSolution &solution,SolutionFactoringInfo *solution_info,unsigned pos_change, tDomain new_value) override;
         /**
         * Create a new solution.
         */
@@ -41,7 +46,14 @@ class Mindiff : public Problem{
     
         //Imprime la matriz
         void imprimirMatriz();
-    
+
+        /**
+         * Calcula la suma de las distancioas de un punto elegido al resto
+         * @param p punto elegido
+         * @param sol Conjunto solucion al problema
+         * @return dis Suma de las distancia
+         */
+        double calcularSumaDistancias(int p,const vector<int> & sol);
 
 }
 ;

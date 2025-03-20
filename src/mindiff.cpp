@@ -21,7 +21,7 @@ using namespace std;
         
         int f;
         int c;
-        int distancia;
+        double distancia;
         for(int i = 0; i < n; i++){
             for(int j = i; j < n; j++){
                 archivo >> f;
@@ -34,27 +34,56 @@ using namespace std;
         archivo.close();
     }
 
-    tFitness Mindiff::fitness(const tSolution &solution){
-
+    double Mindiff::calcularSumaDistancias(int p,const vector<int> & sol){
+        double dis = 0;
+        int u;
+        for(int i = 0; i < sol.size();i++){
+            u = sol[i];
+            if(i != p){
+                if(i < p)
+                    dis += matriz[u][p];
+                else
+                    dis += matriz[p][u];
+            }
+        }
+        return dis;
     }
 
-    tFitness Mindiff::fitness(const tSolution &solution, unsigned pos_previous,
-        tDomain new_value) {
-        tSolution newsol(solution);
-        newsol[pos_previous] = new_value;
-        return fitness(newsol);
+    tFitness Mindiff::fitness(const tSolution &solution){
+       double dis;
+       distancia.first = 0;
+       distancia.second = 0;
+       dis = 0;
+       puntos = {};
+        for(int i = 0; i < solution.size();i++){
+            if(solution[i])
+                puntos.push_back(i);
+        }
+        for(int i = 0; i < puntos.size();i++){
+            dis = 0;
+            dis = calcularSumaDistancias(puntos[i],puntos);
+            if (dis > dis_max)
+                distancia.first = dis;
+            if (dis < dis_min)
+                distancia.second = dis;
+        }
+        return dis_max - dis_min;
+    }
+
+    tFitness Mindiff::fitness(const tSolution &solution,SolutionFactoringInfo *solution_info,unsigned pos_change, tDomain new_value){
+
     }
 
     tSolution Mindiff::createSolution(){
 
     }
 
-    size_t Mindiff::getSolutionSize(){
-
+    size_t Mindiff::getSolutionSize(const tSolution &solution){
+        return solution.size();
     }
 
     pair<tDomain, tDomain> Mindiff::getSolutionDomainRange(){
-
+        
     }
 
     void Mindiff::imprimirMatriz() {
