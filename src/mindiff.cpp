@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <algorithm>
+#include "random.hpp"
 using namespace std;
 
     
@@ -75,7 +77,16 @@ using namespace std;
     }
 
     tSolution Mindiff::createSolution(){
-
+        tSolution solucion(n,false);
+        int u;
+        for(int i = 0; i < m;i++){
+            u = Random::get<int>(0,n-1);
+            while(find(solucion.begin(),solucion.end(),u) != solucion.end()){
+                u = Random::get<int>(0,n-1);
+            }
+            solucion[u] = true;
+        }
+        return solucion;
     }
 
     size_t Mindiff::getSolutionSize(const tSolution &solution){

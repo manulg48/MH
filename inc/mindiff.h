@@ -18,7 +18,7 @@ class Mindiff : public Problem{
         * Evaluate the solution from scratch.
         * @param solution to evaluate.
         */
-       tFitness fitness(const tSolution &solution) = 0;
+       tFitness fitness(const tSolution &solution) override;
        /**
         * Evaluate the solution indicating the current position to change and the new
         * value.
@@ -41,6 +41,7 @@ class Mindiff : public Problem{
         * Return the current size of the solution.
         */
         size_t getSolutionSize(const tSolution &solution);
+        size_t getSolutionSize() override {};
         /** Return the range of domain of each element of the solution */
         pair<tDomain, tDomain> getSolutionDomainRange() override;
     

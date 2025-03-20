@@ -100,6 +100,9 @@ int main(int argc, char *argv[]) {
   // }
   cout << archivos[0] << endl;
   Mindiff problema(archivos[0]);
-  problema.imprimirMatriz();
+  tSolution solucion = problema.createSolution();
+  for (const auto& elemento : solucion) {
+    std::cout << elemento << " ";
+}
   return 0;
 }
