@@ -1,6 +1,7 @@
-// #include <cassert>
-// #include <greedy.h>
-// #include <iostream>
+#include <cassert>
+#include <greedy.h>
+#include <iostream>
+#include <pincrem.h>
 
 // using namespace std;
 
@@ -13,19 +14,20 @@
 //   cout << endl;
 // }
 
-// /**
-//  * Create random solutions until maxevals has been achieved, and returns the
-//  * best one.
-//  *
-//  * @param problem The problem to be optimized
-//  * @param maxevals Maximum number of evaluations allowed
-//  * @return A pair containing the best solution found and its fitness
-//  */
-// ResultMH GreedySearch::optimize(HeuristicProblem *problem, int maxevals) {
-//   assert(maxevals > 0);
-//   vector<tOption> values;
-//   tSolution sol(problem->getSolutionSize());
-//   print_vector("sol_initial", sol);
+/**
+ * Create random solutions until maxevals has been achieved, and returns the
+ * best one.
+ *
+ * @param problem The problem to be optimized
+ * @param maxevals Maximum number of evaluations allowed
+ * @return A pair containing the best solution found and its fitness
+ */
+ResultMH GreedySearch::optimize(Problem *problem, int maxevals) {
+  assert(maxevals > 0);
+  vector<tOption> values;
+  ProblemIncrem *realproblem = dynamic_cast<ProblemIncrem *>(problem);
+  tSolution sol(problem->getSolutionSize());
+  print_vector("sol_initial", sol);
 
 //   auto size = problem->getSolutionSize();
 
@@ -33,9 +35,14 @@
 //     values.push_back(i);
 //   }
 
-//   for (int r = 0; r < size / 2; r++) {
-//     vector<float> heuristics = problem->heuristic(sol, values);
-//     // print_vector("heuristics", heuristics);
+  for (int r = 0; r < size / 2; r++) {
+    vector<float> heuristics;
+
+    for (auto option : values) {
+      tHeuristic value = ((option % 2) == 1 ? sol.size() - option : sol.size());
+      heuristics.push_back(value);
+    }
+    // print_vector("heuristics", heuristics);
 
 //     auto posi = min_element(heuristics.begin(), heuristics.end());
 //     int posi_int = posi - heuristics.begin();
