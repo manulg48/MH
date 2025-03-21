@@ -8,7 +8,7 @@
 // All all algorithms
 // #include "brutesearch.h"
 // #include "greedy.h"
-// #include "randomsearch.h"
+ #include "randomsearch.h"
 
 using namespace std;
 
@@ -98,11 +98,22 @@ int main(int argc, char *argv[]) {
   //   cout << "Best fitness: " << result.fitness << endl;
   //   cout << "Evaluations: " << result.evaluations << endl;
   // }
+  Random::seed(seed);
   cout << archivos[0] << endl;
   Mindiff problema(archivos[0]);
-  tSolution solucion = problema.createSolution();
-  for (const auto& elemento : solucion) {
-    std::cout << elemento << " ";
-}
+  problema.imprimirMatriz();
+  RandomSearch ralg = RandomSearch();
+  vector<pair<string, MH *>> algoritmos = {make_pair("RandomSearch", &ralg)};
+  
+  Problem *problem = dynamic_cast<Problem *>(&problema);
+  for (int i = 0; i < algoritmos.size(); i++) {
+    Random::seed(seed);
+    cout << algoritmos[i].first << endl;
+    MH *mh = algoritmos[i].second;
+    ResultMH result = mh->optimize(problem, 100);
+    cout << "Best solution: " << result.solution << endl;
+    cout << "Best fitness: " << result.fitness << endl;
+    cout << "Evaluations: " << result.evaluations << endl;
+  }
   return 0;
 }

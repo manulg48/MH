@@ -6,8 +6,6 @@ class Mindiff : public Problem{
     private:
         int n;
         int m;
-        vector<int> puntos;
-        pair<double,double> distancia;
 
 
         double **matriz;

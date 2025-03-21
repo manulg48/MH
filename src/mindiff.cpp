@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <limits>
 #include "random.hpp"
 using namespace std;
 
@@ -53,10 +54,10 @@ using namespace std;
 
     tFitness Mindiff::fitness(const tSolution &solution){
        double dis_max,dis_min,dis;
-       distancia.first = 0;
-       distancia.second = 0;
+       dis_max = 0;
+       dis_min = numeric_limits<double>::infinity();
        dis = 0;
-       puntos = {};
+       vector<int> puntos;
         for(int i = 0; i < solution.size();i++){
             if(solution[i])
                 puntos.push_back(i);
@@ -65,9 +66,9 @@ using namespace std;
             dis = 0;
             dis = calcularSumaDistancias(puntos[i],puntos);
             if (dis > dis_max)
-                distancia.first = dis;
+                dis_max = dis;
             if (dis < dis_min)
-                distancia.second = dis;
+                dis_min = dis;
         }
         return dis_max - dis_min;
     }
@@ -81,7 +82,7 @@ using namespace std;
         int u;
         for(int i = 0; i < m;i++){
             u = Random::get<int>(0,n-1);
-            while(find(solucion.begin(),solucion.end(),u) != solucion.end()){
+            while(solucion[u]){
                 u = Random::get<int>(0,n-1);
             }
             solucion[u] = true;

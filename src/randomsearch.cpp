@@ -12,7 +12,6 @@ using namespace std;
  * @return A pair containing the best solution found and its fitness
  */
 ResultMH RandomSearch::optimize(Problem *problem, int maxevals) {
-  assert(maxevals > 0);
   tSolution best;
   tFitness best_fitness = -1;
 
