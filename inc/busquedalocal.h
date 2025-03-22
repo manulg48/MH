@@ -25,13 +25,3 @@ public:
    * @return A pair containing the best solution found and its fitness
    */
   ResultMH optimize(Problem *problem, int maxevals) override;
-
-  /**
-   * Encuentra el nodo que minimiza la dispersion
-   * 
-   * @param values El subconjuntos de nodos a evaluar
-   * @param matriz La matriz con las distancias
-   * @return u El nodo que minimiza la dispersion
-   */
-  int nodoMin(vector<tOption> &values,tSolution &sol, double ** matriz);
-};

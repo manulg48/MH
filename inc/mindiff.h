@@ -38,13 +38,20 @@ class Mindiff : public Problem{
         /**
         * Return the current size of the solution.
         */
-        size_t getSolutionSize(const tSolution &solution);
-        size_t getSolutionSize() override {};
+        size_t getSolutionSize();
         /** Return the range of domain of each element of the solution */
         pair<tDomain, tDomain> getSolutionDomainRange() override;
     
         //Imprime la matriz
         void imprimirMatriz();
+
+        double** getMatriz();
+
+        /**
+        *  Devuelve el tamañano del problema
+        * @return n Tamaño del problema 
+        */
+        int getProblemSize() override;
 
         /**
          * Calcula la suma de las distancioas de un punto elegido al resto

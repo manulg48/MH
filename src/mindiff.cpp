@@ -90,10 +90,13 @@ using namespace std;
         return solucion;
     }
 
-    size_t Mindiff::getSolutionSize(const tSolution &solution){
+    size_t Mindiff::getSolutionSize(){
         return m;
     }
 
+    int Mindiff::getProblemSize(){
+        return n;
+    }
     pair<tDomain, tDomain> Mindiff::getSolutionDomainRange(){
         
     }
@@ -111,4 +114,8 @@ using namespace std;
             }
             cout << endl;
         }
+    }
+
+    double ** Mindiff::getMatriz(){
+        return matriz;
     }

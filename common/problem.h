@@ -82,6 +82,7 @@ public:
    * Create a new solution.
    */
   virtual tSolution createSolution() = 0;
+  virtual int getProblemSize() = 0;
   /**
    * Return the current size of the solution.
    */

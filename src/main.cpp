@@ -3,11 +3,10 @@
 #include <string>
 #include <util.h>
 // Real problem class
-#include "pincrem.h"
 #include "mindiff.h"
 // All all algorithms
 // #include "brutesearch.h"
-// #include "greedy.h"
+ #include "greedy.h"
  #include "randomsearch.h"
 
 using namespace std;
@@ -103,14 +102,21 @@ int main(int argc, char *argv[]) {
   Mindiff problema(archivos[0]);
   problema.imprimirMatriz();
   RandomSearch ralg = RandomSearch();
-  vector<pair<string, MH *>> algoritmos = {make_pair("RandomSearch", &ralg)};
-  
+  GreedySearch rgreedy = GreedySearch();
+  vector<pair<string, MH *>> algoritmos = {make_pair("RandomSearch", &ralg),make_pair("Greedy",&rgreedy)};
+  int evals;
+
   Problem *problem = dynamic_cast<Problem *>(&problema);
   for (int i = 0; i < algoritmos.size(); i++) {
     Random::seed(seed);
     cout << algoritmos[i].first << endl;
     MH *mh = algoritmos[i].second;
-    ResultMH result = mh->optimize(problem, 100);
+    if(algoritmos[i].first == "Greedy")
+      evals = 1;
+    else
+      evals = 100000;
+      ResultMH result = mh->optimize(problem, evals);
+
     cout << "Best solution: " << result.solution << endl;
     cout << "Best fitness: " << result.fitness << endl;
     cout << "Evaluations: " << result.evaluations << endl;
