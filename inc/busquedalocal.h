@@ -10,11 +10,11 @@ using namespace std;
  * @see MH
  * @see Problem
  */
-class GreedySearch : public MH {
+class BusquedaLocal : public MH {
 
 public:
-  GreedySearch() : MH() {}
-  virtual ~GreedySearch() {}
+  BusquedaLocal() : MH() {}
+  virtual ~BusquedaLocal() {}
   // Implement the MH interface methods
   /**
    * Create random solutions until maxevals has been achieved, and returns the
@@ -25,3 +25,4 @@ public:
    * @return A pair containing the best solution found and its fitness
    */
   ResultMH optimize(Problem *problem, int maxevals) override;
+};
