@@ -9,7 +9,7 @@
  */
 class GeneticAlgorithm : public MHTrayectory {
 public:
-  GeneticAlgorithm(int populationSize = 50, double crossProb = 0.7, double mutationProb = 0.1);
+  GeneticAlgorithm(int _populationSize = 50, double _crossProb = 0.7, double _mutationProb = 0.1);
   virtual ~GeneticAlgorithm() {}
 
   /**
@@ -47,11 +47,6 @@ private:
   // Tracking best solution
   tSolution bestSolution;
   tFitness bestFitness;
-
-  // Random number generators
-  std::mt19937 rng;
-  std::uniform_real_distribution<double> realDist;
-  std::uniform_int_distribution<int> intDist;
 
   // Initialization and selection methods
   tSolution generateRandomSolution(Problem* problem);
