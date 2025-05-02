@@ -34,7 +34,7 @@ private:
     void evaluate_population();
     int tournament();
     std::pair<tSolution, tSolution> crossover(const tSolution& p1, const tSolution& p2, Problem* problem);
-    void mutate(tSolution& s);
+    void mutate(tSolution& s,Problem* problem);
     void replace_population(const std::vector<tSolution>& offspring, const std::vector<tFitness>& offspring_fit);
     int best_index();
 };
