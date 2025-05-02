@@ -94,7 +94,7 @@ using namespace std;
         return m;
     }
 
-    int Mindiff::getProblemSize(){
+    size_t Mindiff::getProblemSize(){
         return n;
     }
     pair<tDomain, tDomain> Mindiff::getSolutionDomainRange(){

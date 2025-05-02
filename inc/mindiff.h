@@ -51,7 +51,7 @@ class Mindiff : public Problem{
         *  Devuelve el tamañano del problema
         * @return n Tamaño del problema 
         */
-        int getProblemSize() override;
+        size_t getProblemSize() override;
 
         /**
          * Calcula la suma de las distancioas de un punto elegido al resto
