@@ -86,59 +86,100 @@ bool BusquedaLocal::calcularCoste(vector<tOption> &sel, tOption i, tOption j, Mi
 }
 
 ResultMH BusquedaLocal::optimize(Problem *problem, int maxevals){
-    assert(maxevals == 100000);
     Mindiff *realproblem = dynamic_cast<Mindiff *>(problem);
     auto m = problem->getSolutionSize();
     auto n = problem->getProblemSize();
-    double ** matriz = realproblem->getMatriz();
-    tOption j;
+    double **matriz = realproblem->getMatriz();
     tSolution sol = problem->createSolution();
-    tFitness fitness = problem->fitness(sol);
-    vector<tOption> values;
-    vector<tOption> valuesOriginal;
-    vector<tOption> vecinos;
+    tFitness costeActual = problem->fitness(sol);
     int evaluaciones = 0;
-    bool coste;
-    for(int i = 0; i < n; i++){
-        if (sol[i])
-            values.push_back(i);
+
+    vector<tOption> seleccionados;
+    for (int i = 0; i < n; ++i) {
+        if (sol[i]) seleccionados.push_back(i);
     }
-    valuesOriginal = values;
-    
-    vector<tOption> valuesSeleccionados;
-    int l;
-    for(int i = 0; i < m && evaluaciones < maxevals; i++){
-        vecinos.clear();
-        for(int l = 0; l < n; l++){
-            vecinos.push_back(l);
-        }
-    
-        for(int z = 0; z < m;z++){
-            vecinos.erase(remove(vecinos.begin(),vecinos.end(),values[z]),vecinos.end());
-        }
-        do{
-            l = Random::get<tOption>(0,values.size()-1);
-        }while(find(valuesSeleccionados.begin(),valuesSeleccionados.end(),valuesOriginal[l]) != valuesSeleccionados.end());
-        valuesSeleccionados.push_back(l);
-        do{
-            do{
-                j = Random::get<tOption>(0,n-1);
-                if (!verifica(values, values[l], j, m)) {
+
+    bool mejora = true;
+
+    while (mejora && evaluaciones < maxevals) {
+        mejora = false;
+
+        vector<pair<tOption, tOption>> vecinos;
+        for (size_t i = 0; i < seleccionados.size(); ++i) {
+            for (tOption j = 0; j < n; ++j) {
+                if (!sol[j]) {
+                    vecinos.emplace_back(i, j);
                 }
-                
-            }while((!verifica(values, values[l], j, m)) || (find(vecinos.begin(), vecinos.end(), j) == vecinos.end()));
-            coste = calcularCoste(values, l, j, realproblem, fitness, sol);
-            if (coste) {
-                values[l] = j;
-                actualizarSolucion(sol, values);
-                fitness = realproblem->getCosteActual();
-                vecinos.erase(remove(vecinos.begin(),vecinos.end(), j),vecinos.end());
-                break;
             }
-            vecinos.erase(remove(vecinos.begin(),vecinos.end(),j),vecinos.end());
+        }
+
+        shuffle(vecinos.begin(), vecinos.end(), Random::engine());
+
+        for (auto [i, j] : vecinos) {
+            if (evaluaciones >= maxevals) break;
             evaluaciones++;
-        }while (!coste && evaluaciones < maxevals && vecinos.size() > 0);
+
+            if (verifica(seleccionados, seleccionados[i], j, m)) {
+                if (calcularCoste(seleccionados, i, j, realproblem, costeActual, sol)) {
+                    seleccionados[i] = j;
+                    costeActual = problem->fitness(sol);
+                    mejora = true;
+                    break; // Primera mejora
+                }
+            }
+        }
     }
-    return ResultMH(sol, fitness,evaluaciones);
+
+    return ResultMH(sol, costeActual, evaluaciones);
 }
 
+
+ResultMH BusquedaLocal::optimize(Problem *problem, const tSolution &solution, tFitness fitness, int maxevals) {
+    Mindiff *realproblem = dynamic_cast<Mindiff *>(problem);
+    auto m = problem->getSolutionSize();
+    auto n = problem->getProblemSize();
+    double **matriz = realproblem->getMatriz();
+    tSolution sol = solution;
+    tFitness costeActual = fitness;
+    int evaluaciones = 0;
+    int intentos = 0;
+
+    std::vector<tOption> seleccionados;
+    for (int i = 0; i < n; ++i) {
+        if (sol[i]) seleccionados.push_back(i);
+    }
+
+    bool mejora = true;
+
+    while (mejora && evaluaciones < maxevals && intentos < 400) {
+        mejora = false;
+
+        std::vector<std::pair<tOption, tOption>> vecinos;
+        for (size_t i = 0; i < seleccionados.size(); ++i) {
+            for (tOption j = 0; j < n; ++j) {
+                if (!sol[j]) {
+                    vecinos.emplace_back(i, j);
+                }
+            }
+        }
+
+        std::shuffle(vecinos.begin(), vecinos.end(), Random::engine());
+
+        for (auto [i, j] : vecinos) {
+            if (evaluaciones >= maxevals) break;
+            evaluaciones++;
+
+            if (verifica(seleccionados, seleccionados[i], j, m)) {
+                if (calcularCoste(seleccionados, i, j, realproblem, costeActual, sol)) {
+                    seleccionados[i] = j;
+                    costeActual = problem->fitness(sol);
+                    mejora = true;
+                    break; // Primera mejora
+                }
+            }
+            intentos++;
+        }
+    }
+
+    return ResultMH(sol, costeActual, evaluaciones);
+}

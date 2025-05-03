@@ -1,3 +1,4 @@
+#pragma once
 #include "problem.h"
 
 using namespace std;
@@ -6,9 +7,11 @@ class Mindiff : public Problem{
     private:
         int n;
         int m;
-
-
+        double dis_max;
+        double dis_min;
+        double *distancias;
         double **matriz;
+        tFitness costeActual;
     public:
         Mindiff(const string& path);
         ~Mindiff(){};
@@ -47,6 +50,7 @@ class Mindiff : public Problem{
 
         double** getMatriz();
 
+        double * getDistancias();
         /**
         *  Devuelve el tamañano del problema
         * @return n Tamaño del problema 
@@ -61,5 +65,9 @@ class Mindiff : public Problem{
          */
         double calcularSumaDistancias(int p,const vector<int> & sol);
 
+        void setDistancia(double * _distancia,int n);
+        void setRangoDistancia(pair<double,double> _distancia);
+        void setCosteActual(double _coste);
+        tFitness getCosteActual();
 }
 ;

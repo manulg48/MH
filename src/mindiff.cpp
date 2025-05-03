@@ -37,40 +37,40 @@ using namespace std;
         archivo.close();
     }
 
-    double Mindiff::calcularSumaDistancias(int p,const vector<int> & sol){
+    double Mindiff::calcularSumaDistancias(int p, const vector<int> &sol) {
         double dis = 0;
-        int u;
-        for(int i = 0; i < sol.size();i++){
-            u = sol[i];
-            if(i != p){
-                if(i < p)
-                    dis += matriz[u][p];
+        for (int i = 0; i < sol.size(); i++) {
+            int u = sol[i];
+            if (u != p) {
+                if (u < p)
+                    dis += matriz[u][p];  // parte superior
                 else
-                    dis += matriz[p][u];
+                    dis += matriz[p][u];  // parte inferior
             }
         }
         return dis;
     }
+    
 
     tFitness Mindiff::fitness(const tSolution &solution){
-       double dis_max,dis_min,dis;
        dis_max = 0;
        dis_min = numeric_limits<double>::infinity();
-       dis = 0;
+       double dis = 0;
+       distancias = new double[m];
        vector<int> puntos;
         for(int i = 0; i < solution.size();i++){
             if(solution[i])
                 puntos.push_back(i);
         }
         for(int i = 0; i < puntos.size();i++){
-            dis = 0;
-            dis = calcularSumaDistancias(puntos[i],puntos);
-            if (dis > dis_max)
-                dis_max = dis;
-            if (dis < dis_min)
-                dis_min = dis;
+            distancias[i] = calcularSumaDistancias(puntos[i],puntos);
+            if (distancias[i] > dis_max)
+                dis_max = distancias[i];
+            if (distancias[i] < dis_min)
+                dis_min = distancias[i];
         }
-        return dis_max - dis_min;
+        costeActual = dis_max - dis_min;
+        return costeActual;
     }
 
     tFitness Mindiff::fitness(const tSolution &solution,SolutionFactoringInfo *solution_info,unsigned pos_change, tDomain new_value){
@@ -94,11 +94,11 @@ using namespace std;
         return m;
     }
 
-    size_t Mindiff::getProblemSize(){
+    int Mindiff::getProblemSize(){
         return n;
     }
-    pair<tDomain, tDomain> Mindiff::getSolutionDomainRange(){
-        
+    pair<double, double> Mindiff::getSolutionDomainRange(){
+        return make_pair(dis_min,dis_max);
     }
 
     void Mindiff::imprimirMatriz() {
@@ -118,4 +118,29 @@ using namespace std;
 
     double ** Mindiff::getMatriz(){
         return matriz;
+    }
+
+    double * Mindiff::getDistancias(){
+        return distancias;
+    }
+
+    void Mindiff::setDistancia(double * _distancia,int n){
+        int * aux = new int[n];
+
+        for(int i = 0; i < n;i++){
+            distancias[i] = _distancia[i];
+        }
+    }
+
+    void Mindiff::setRangoDistancia(pair<double,double> _distancia){
+        dis_max = _distancia.second;
+        dis_min = _distancia.first;
+    }
+
+    void Mindiff::setCosteActual(double coste){
+        costeActual = coste;
+    }
+
+    tFitness Mindiff::getCosteActual(){
+        return costeActual;
     }
