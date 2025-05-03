@@ -1,0 +1,32 @@
+#pragma once
+#include <mh.h>
+
+using namespace std;
+
+/**
+ * Implementation of the Random Search metaheuristic
+ *  - Randomly generates solutions and selects the best one
+ *
+ * @see MH
+ * @see Problem
+ */
+class BusquedaLocal : public MH {
+
+public:
+  BusquedaLocal() : MH() {}
+  virtual ~BusquedaLocal() {}
+  // Implement the MH interface methods
+  /**
+   * Create random solutions until maxevals has been achieved, and returns the
+   * best one.
+   *
+   * @param problem The problem to be optimized
+   * @param maxevals Maximum number of evaluations allowed
+   * @return A pair containing the best solution found and its fitness
+   */
+  ResultMH optimize(Problem *problem, int maxevals) override;
+
+  bool verifica(const vector<tOption>& sel, tOption i, tOption j, int m);
+  bool calcularCoste(vector<tOption> &sel, tOption i, tOption j, Mindiff *problema, tFitness costeActual, tSolution &sol);
+  void actualizarSolucion(vector<tDomain> &sol,vector<tOption> & sel);
+};
