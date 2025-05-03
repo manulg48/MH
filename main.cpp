@@ -98,10 +98,10 @@ int main(int argc, char *argv[]) {
     map<string, Resultado> tabla3;
 
     vector<pair<string, MH *>> algoritmos = {
-        {"AGG-uniforme", new GeneticAlgorithm(50,0.7,1,CrossoverType::UNIFORM,EvolutionModel::GENERATIONAL)},
-        {"AGG-posicion", new GeneticAlgorithm(50,0.7,1,CrossoverType::POSITION,EvolutionModel::GENERATIONAL)},
-        {"AGE-uniforme", new GeneticAlgorithm(50,0.7,1,CrossoverType::UNIFORM,EvolutionModel::STATIONARY)},
-        {"AGE-posicion", new GeneticAlgorithm(50,0.7,1,CrossoverType::POSITION,EvolutionModel::STATIONARY)}
+        {"AGG-uniforme", new GeneticAlgorithm(50,0.7,0.1,CrossoverType::UNIFORM,EvolutionModel::GENERATIONAL)},
+        {"AGG-posicion", new GeneticAlgorithm(50,0.7,0.1,CrossoverType::POSITION,EvolutionModel::GENERATIONAL)},
+        {"AGE-uniforme", new GeneticAlgorithm(50,1,0.1,CrossoverType::UNIFORM,EvolutionModel::STATIONARY)},
+        {"AGE-posicion", new GeneticAlgorithm(50,1,0.1,CrossoverType::POSITION,EvolutionModel::STATIONARY)}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {

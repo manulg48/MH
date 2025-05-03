@@ -2,6 +2,24 @@
 #include "random.hpp"
 #include <algorithm>
 
+void mutatePopulation(std::vector<tSolution>& population, double pm) {
+    int M = population.size();     // número de individuos
+    int n = population[0].size();  // tamaño del cromosoma
+    int totalGenes = M * n;
+
+    int numMutations = static_cast<int>(std::ceil(pm * totalGenes));
+    std::vector<int> indices(totalGenes);
+    std::iota(indices.begin(), indices.end(), 0);
+    Random::shuffle(indices);
+
+    for (int i = 0; i < numMutations; ++i) {
+        int flatIndex = indices[i];
+        int ind = flatIndex / n;
+        int gene = flatIndex % n;
+        population[ind][gene] = 1 - population[ind][gene]; // flip bit
+    }
+}
+
 std::pair<tSolution, tSolution> crossoverUniform(const tSolution& p1, const tSolution& p2, int m, int n) {
     tSolution h1(n, 0), h2(n, 0);
 
@@ -99,63 +117,63 @@ ResultMH GeneticAlgorithm::optimize(Problem* problem, const tSolution& current,
         std::vector<tFitness> offspring_fit;
 
         
-if (evolution_model == EvolutionModel::GENERATIONAL) {
-    for (size_t i = 0; i < pop_size / 2; ++i) {
-        tSolution p1 = population[tournament()];
-        tSolution p2 = population[tournament()];
-        auto [h1, h2] = crossover(p1, p2, problem);
-        offspring.push_back(h1);
-        offspring.push_back(h2);
-    }
-
-    // Aplicar mutación por generación completa
-    mutatePopulation(offspring, pm);
-
-    // Evaluar descendencia
-    offspring_fit.clear();
-    for (auto& ind : offspring) {
-        offspring_fit.push_back(prob_ptr->fitness(ind));
-        ++evals;
-    }
-
-    // Elitismo: preservar el mejor de la generación anterior
-    int best_idx = best_index();
-    tSolution best_sol = population[best_idx];
-    tFitness best_fit = fitnesses[best_idx];
-
-    int worst_idx = std::distance(offspring_fit.begin(),
-                                  std::max_element(offspring_fit.begin(), offspring_fit.end()));
-    if (offspring_fit[worst_idx] > best_fit) {
-        offspring[worst_idx] = best_sol;
-        offspring_fit[worst_idx] = best_fit;
-    }
-
-    replace_population(offspring, offspring_fit);
-
-        } 
-else { // STATIONARY
-    tSolution p1 = population[tournament()];
-    tSolution p2 = population[tournament()];
-    auto [h1, h2] = crossover(p1, p2, problem);
-
-    if (Random::get(0.0, 1.0) < pm) mutate(h1, problem);
-    if (Random::get(0.0, 1.0) < pm) mutate(h2, problem);
-
-    tFitness f1 = prob_ptr->fitness(h1); ++evals;
-    tFitness f2 = prob_ptr->fitness(h2); ++evals;
-
-
-            int worst_idx = std::distance(fitnesses.begin(),
-                std::max_element(fitnesses.begin(), fitnesses.end()));
-            if (f1 < fitnesses[worst_idx]) {
-                population[worst_idx] = h1;
-                fitnesses[worst_idx] = f1;
+        if (evolution_model == EvolutionModel::GENERATIONAL) {
+            for (size_t i = 0; i < pop_size / 2; ++i) {
+                tSolution p1 = population[tournament()];
+                tSolution p2 = population[tournament()];
+                auto [h1, h2] = crossover(p1, p2, problem);
+                offspring.push_back(h1);
+                offspring.push_back(h2);
             }
-            if (f2 < fitnesses[worst_idx]) {
-                population[worst_idx] = h2;
-                fitnesses[worst_idx] = f2;
+
+            // Aplicar mutación por generación completa
+            mutatePopulation(offspring, pm);
+
+            // Evaluar descendencia
+            offspring_fit.clear();
+            for (auto& ind : offspring) {
+                offspring_fit.push_back(prob_ptr->fitness(ind));
+                ++evals;
             }
-        }
+
+            // Elitismo: preservar el mejor de la generación anterior
+            int best_idx = best_index();
+            tSolution best_sol = population[best_idx];
+            tFitness best_fit = fitnesses[best_idx];
+
+            int worst_idx = std::distance(offspring_fit.begin(),
+                                        std::max_element(offspring_fit.begin(), offspring_fit.end()));
+            if (offspring_fit[worst_idx] > best_fit) {
+                offspring[worst_idx] = best_sol;
+                offspring_fit[worst_idx] = best_fit;
+            }
+
+            replace_population(offspring, offspring_fit);
+
+                } 
+        else { // STATIONARY
+            tSolution p1 = population[tournament()];
+            tSolution p2 = population[tournament()];
+            auto [h1, h2] = crossover(p1, p2, problem);
+
+            if (Random::get(0.0, 1.0) < pm) mutate(h1, problem);
+            if (Random::get(0.0, 1.0) < pm) mutate(h2, problem);
+
+            tFitness f1 = prob_ptr->fitness(h1); ++evals;
+            tFitness f2 = prob_ptr->fitness(h2); ++evals;
+
+
+                    int worst_idx = std::distance(fitnesses.begin(),
+                        std::max_element(fitnesses.begin(), fitnesses.end()));
+                    if (f1 < fitnesses[worst_idx]) {
+                        population[worst_idx] = h1;
+                        fitnesses[worst_idx] = f1;
+                    }
+                    if (f2 < fitnesses[worst_idx]) {
+                        population[worst_idx] = h2;
+                        fitnesses[worst_idx] = f2;
+                    }
+                }
     }
 
     int best = best_index();
@@ -243,21 +261,3 @@ int GeneticAlgorithm::best_index() {
 }
 
 
-// Mutación por número esperado de genes
-void mutatePopulation(std::vector<tSolution>& population, double pm) {
-    int M = population.size();     // número de individuos
-    int n = population[0].size();  // tamaño del cromosoma
-    int totalGenes = M * n;
-
-    int numMutations = static_cast<int>(std::ceil(pm * totalGenes));
-    std::vector<int> indices(totalGenes);
-    std::iota(indices.begin(), indices.end(), 0);
-    Random::shuffle(indices);
-
-    for (int i = 0; i < numMutations; ++i) {
-        int flatIndex = indices[i];
-        int ind = flatIndex / n;
-        int gene = flatIndex % n;
-        population[ind][gene] = 1 - population[ind][gene]; // flip bit
-    }
-}
