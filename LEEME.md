@@ -6,7 +6,7 @@ Estructura del proyecto:
 - common/: Librerías y utilidades comunes necesarias para el desarrollo de la práctica.
 - datos/: Archivos de entrada correspondientes a las instancias del problema MDD.
 - inc/: Ficheros de cabecera (.h) que definen estructuras de datos y algoritmos.
-- src/: Código fuente (.cpp) donde se implementan los algoritmos: Greedy, Random, Búsqueda Local.
+- src/: Código fuente (.cpp) donde se implementan los algoritmos: Genético, memético, Búsqueda Local.
 - Makefile: Script para automatizar la compilación y ejecución del proyecto usando CMake.
 - CMakeLists.txt: Archivo de configuración para CMake.
 - LICENSE: Archivo de licencia (opcional).
