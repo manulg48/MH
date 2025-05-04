@@ -15,6 +15,8 @@ public:
 
     ResultMH optimize(Problem* problem, const tSolution& current,
                       tFitness fitness, int maxevals) override;
+    
+    ResultMH optimize(Problem *problem, int maxevals) override;
 
 private:
     size_t pop_size;

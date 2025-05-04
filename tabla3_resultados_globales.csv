@@ -1,0 +1,8 @@
+Algoritmo,Desv,Tiempo(ms)
+AGE-posicion,56.80,1881.97
+AGE-uniforme,54.59,1623.20
+AGG-posicion,64.56,2058.79
+AGG-uniforme,60.21,1781.83
+AM-(10,0.1),40.51,969.50
+AM-(10,0.1mej),47.17,954.16
+AM-(10,1.0),37.80,907.14

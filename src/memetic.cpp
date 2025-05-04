@@ -4,6 +4,70 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <utility>
+
+std::pair<tSolution, tSolution> crossoverUniformM(const tSolution& p1, const tSolution& p2, int m, int n) {
+    tSolution h1(n, 0), h2(n, 0);
+
+    for (int i = 0; i < n; ++i) {
+        if (p1[i] == 1 && p2[i] == 1) {
+            h1[i] = h2[i] = 1;
+        } else if (p1[i] != p2[i]) {
+            if (Random::get<bool>()) h1[i] = 1;
+            else h2[i] = 1;
+        }
+    }
+
+    auto repair = [&](tSolution& s) {
+        int count = std::count(s.begin(), s.end(), 1);
+        if (count > m) {
+            std::vector<int> ones;
+            for (int i = 0; i < n; ++i)
+                if (s[i] == 1) ones.push_back(i);
+            Random::shuffle(ones);
+            for (int i = 0; i < count - m; ++i)
+                s[ones[i]] = 0;
+        } else if (count < m) {
+            std::vector<int> zeros;
+            for (int i = 0; i < n; ++i)
+                if (s[i] == 0) zeros.push_back(i);
+            Random::shuffle(zeros);
+            for (int i = 0; i < m - count; ++i)
+                s[zeros[i]] = 1;
+        }
+    };
+
+    repair(h1);
+    repair(h2);
+
+    return {h1, h2};
+}
+
+std::pair<tSolution, tSolution> crossoverPositionM(const tSolution& p1, const tSolution& p2, int m, int n) {
+    tSolution h1(n, 0), h2(n, 0);
+
+    for (int i = 0; i < n; ++i) {
+        if (p1[i] == 1 && p2[i] == 1)
+            h1[i] = h2[i] = 1;
+    }
+
+    auto assign_remaining = [&](tSolution& h) {
+        std::vector<int> available;
+        for (int i = 0; i < n; ++i) {
+            if ((p1[i] == 1 || p2[i] == 1) && h[i] == 0)
+                available.push_back(i);
+        }
+        Random::shuffle(available);
+        int needed = m - std::count(h.begin(), h.end(), 1);
+        for (int i = 0; i < needed && i < (int)available.size(); ++i)
+            h[available[i]] = 1;
+    };
+
+    assign_remaining(h1);
+    assign_remaining(h2);
+
+    return {h1, h2};
+}
 
 struct Individuo {
     tSolution sol;
@@ -21,7 +85,7 @@ static Individuo torneo3(const std::vector<Individuo> &pobla) {
     return std::min({a, b, c});
 }
 
-void mutate(tSolution& s, int m, int n) {
+void mutateM(tSolution& s, int m, int n) {
     std::vector<int> ones, zeros;
     for (int i = 0; i < n; ++i) {
         if (s[i] == 1) ones.push_back(i);
@@ -42,7 +106,7 @@ static void mutarIndividuos(std::vector<Individuo> &hijos, Problem *problem, int
     m = problem->getSolutionSize();
     for (int i = 0; i < cantidad; ++i) {
         int idx = Random::get<int>(0, hijos.size() - 1);
-        mutate(hijos[idx].sol,m,n);
+        mutateM(hijos[idx].sol,m,n);
     }
 }
 
@@ -94,8 +158,8 @@ static ResultMH ejecutarAM(Problem *problem, const tSolution &current, tFitness 
     poblacion[0] = {current, fitness};
     evaluaciones++;
     for (int i = 1; i < POP_SIZE; ++i) {
-        problem->initialize(poblacion[i].sol);
-        poblacion[i].fit = problem->evaluate(poblacion[i].sol);
+        poblacion[i].sol = problem->createSolution();
+        poblacion[i].fit = problem->fitness(poblacion[i].sol);
         evaluaciones++;
     }
 
@@ -110,8 +174,11 @@ static ResultMH ejecutarAM(Problem *problem, const tSolution &current, tFitness 
 
         std::vector<Individuo> hijos(POP_SIZE);
         int cruces = std::ceil(PC * POP_SIZE / 2);
-        for (int i = 0; i < cruces * 2; i += 2)
-            problem->crossover(padres[i].sol, padres[i + 1].sol, hijos[i].sol, hijos[i + 1].sol);
+        for (int i = 0; i < cruces * 2; i += 2){
+            auto [h1,h2] = crossoverPositionM(padres[i].sol,padres[i+1].sol,problem->getSolutionSize(),problem->getProblemSize());
+            hijos[i].sol = h1;
+            hijos[i + 1].sol = h2;
+        } 
 
         for (int i = cruces * 2; i < POP_SIZE; ++i)
             hijos[i] = padres[i];
@@ -119,7 +186,7 @@ static ResultMH ejecutarAM(Problem *problem, const tSolution &current, tFitness 
         mutarIndividuos(hijos, problem, std::ceil(PM * POP_SIZE));
 
         for (auto &h : hijos) {
-            h.fit = problem->evaluate(h.sol);
+            h.fit = problem->fitness(h.sol);
             evaluaciones++;
         }
 

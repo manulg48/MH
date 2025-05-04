@@ -9,7 +9,7 @@ class Mindiff : public Problem{
         int m;
         double dis_max;
         double dis_min;
-        double *distancias;
+        std::vector<double> distancias;
         double **matriz;
         tFitness costeActual;
     public:
@@ -50,7 +50,7 @@ class Mindiff : public Problem{
 
         double** getMatriz();
 
-        double * getDistancias();
+        std::vector<double>& getDistancias();
         /**
         *  Devuelve el tamañano del problema
         * @return n Tamaño del problema 

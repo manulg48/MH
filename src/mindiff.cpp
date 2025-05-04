@@ -56,7 +56,7 @@ using namespace std;
        dis_max = 0;
        dis_min = numeric_limits<double>::infinity();
        double dis = 0;
-       distancias = new double[m];
+       distancias.resize(m);
        vector<int> puntos;
         for(int i = 0; i < solution.size();i++){
             if(solution[i])
@@ -94,10 +94,10 @@ using namespace std;
         return m;
     }
 
-    int Mindiff::getProblemSize(){
+    size_t Mindiff::getProblemSize(){
         return n;
     }
-    pair<double, double> Mindiff::getSolutionDomainRange(){
+    pair<tDomain, tDomain> Mindiff::getSolutionDomainRange(){
         return make_pair(dis_min,dis_max);
     }
 
@@ -120,9 +120,10 @@ using namespace std;
         return matriz;
     }
 
-    double * Mindiff::getDistancias(){
+    std::vector<double>& Mindiff::getDistancias() {
         return distancias;
     }
+    
 
     void Mindiff::setDistancia(double * _distancia,int n){
         int * aux = new int[n];

@@ -3,22 +3,26 @@
 #include <algorithm>
 
 void mutatePopulation(std::vector<tSolution>& population, double pm) {
-    int M = population.size();     // número de individuos
-    int n = population[0].size();  // tamaño del cromosoma
-    int totalGenes = M * n;
+    int n = population[0].size();
 
-    int numMutations = static_cast<int>(std::ceil(pm * totalGenes));
-    std::vector<int> indices(totalGenes);
-    std::iota(indices.begin(), indices.end(), 0);
-    Random::shuffle(indices);
+    for (auto& ind : population) {
+        if (Random::get<double>() < pm) {
+            std::vector<int> ones, zeros;
+            for (int i = 0; i < n; ++i) {
+                if (ind[i] == 1) ones.push_back(i);
+                else zeros.push_back(i);
+            }
 
-    for (int i = 0; i < numMutations; ++i) {
-        int flatIndex = indices[i];
-        int ind = flatIndex / n;
-        int gene = flatIndex % n;
-        population[ind][gene] = 1 - population[ind][gene]; // flip bit
+            if (!ones.empty() && !zeros.empty()) {
+                int quitar = Random::get<int>(0, ones.size() - 1);
+                int poner = Random::get<int>(0, zeros.size() - 1);
+                ind[ones[quitar]] = 0;
+                ind[zeros[poner]] = 1;
+            }
+        }
     }
 }
+
 
 std::pair<tSolution, tSolution> crossoverUniform(const tSolution& p1, const tSolution& p2, int m, int n) {
     tSolution h1(n, 0), h2(n, 0);
@@ -178,6 +182,14 @@ ResultMH GeneticAlgorithm::optimize(Problem* problem, const tSolution& current,
 
     int best = best_index();
     return ResultMH{population[best], fitnesses[best], evals};
+}
+
+ResultMH GeneticAlgorithm::optimize(Problem *problem, int maxevals) {
+    tSolution initial = problem->createSolution();
+    tFitness fit = problem->fitness(initial);
+    int evals = 1;
+
+    return optimize(problem, initial, fit, maxevals - evals);
 }
 
 void GeneticAlgorithm::initialize_population(const tSolution& initial, tFitness fitness) {

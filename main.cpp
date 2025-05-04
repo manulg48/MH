@@ -14,6 +14,7 @@
 // #include "busquedalocal.h"
 // #include "busquedalocalinteligente.h"
 #include "genetic.h"
+#include "memetic.h"
 
 using namespace std;
 using namespace chrono;
@@ -101,7 +102,10 @@ int main(int argc, char *argv[]) {
         {"AGG-uniforme", new GeneticAlgorithm(50,0.7,0.1,CrossoverType::UNIFORM,EvolutionModel::GENERATIONAL)},
         {"AGG-posicion", new GeneticAlgorithm(50,0.7,0.1,CrossoverType::POSITION,EvolutionModel::GENERATIONAL)},
         {"AGE-uniforme", new GeneticAlgorithm(50,1,0.1,CrossoverType::UNIFORM,EvolutionModel::STATIONARY)},
-        {"AGE-posicion", new GeneticAlgorithm(50,1,0.1,CrossoverType::POSITION,EvolutionModel::STATIONARY)}
+        {"AGE-posicion", new GeneticAlgorithm(50,1,0.1,CrossoverType::POSITION,EvolutionModel::STATIONARY)},
+        {"AM-(10,1.0)", new AM101},
+        {"AM-(10,0.1)", new AM1001},
+       {"AM-(10,0.1mej)", new AM1001Mej}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {
