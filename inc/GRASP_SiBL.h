@@ -24,5 +24,8 @@ private:
   int numSolutions;    // p.ej. 10 iteraciones
   BusquedaLocal bl;    // BL a aplicar tras cada construcción
 
+  tSolution sol;
+  tFitness fit;
+  int evals;
   tSolution construir(Problem *problem);
 };

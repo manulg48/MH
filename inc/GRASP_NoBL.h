@@ -21,6 +21,10 @@ public:
 private:
   int numSolutions;  // p.ej. 10 construcciones :contentReference[oaicite:5]{index=5}
 
+  tSolution sol;
+  tFitness fit;
+  int evals;
+  
   // Construye una solución parcial con LRC dinámico
   tSolution construir(Problem *problem);
 };

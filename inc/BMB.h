@@ -2,6 +2,7 @@
 #include "mh.h"
 #include "mindiff.h"
 #include "busquedalocal.h"
+#include "solution.h"
 
 using namespace std;
 
@@ -24,4 +25,7 @@ public:
 private:
   int numRestarts;    // nº de arranques (p.ej. 10)
   BusquedaLocal bl;   // algoritmo de BL para refinar soluciones
+  tSolution sol;
+  tFitness fit;
+  int evals;
 };

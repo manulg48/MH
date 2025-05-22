@@ -28,6 +28,9 @@ private:
   int numIterations;   // p.ej. 10 aplicaciones de BL :contentReference[oaicite:2]{index=2}
   int maxEvalsBL;      // evaluaciones límite para cada BL (p.ej. 10000)
 
+  tSolution sol;
+  tFitness fit;
+  int evals;
   // Mutación “fuerte” (20% de elementos)
   void mutar(const tSolution &orig, tSolution &mod);
 };

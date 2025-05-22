@@ -27,5 +27,9 @@ private:
   int numIterations;         // nº de iteraciones totales
   EnfriamientoSimulado es;   // refinamiento interno con ES
 
+  tSolution sol;
+  tFitness fit;
+  int evals;
+  
   void mutar(const tSolution &orig, tSolution &mod);
 };

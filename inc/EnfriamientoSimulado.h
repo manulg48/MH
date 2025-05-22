@@ -32,6 +32,9 @@ private:
   int maxVecinos;      // número máximo de vecinos por temperatura
   int maxExitos;       // número máximo de éxitos por temperatura
 
+  tSolution sol;
+  tFitness fit;
+  int evals;
   // Esquema de enfriamiento: Tk+1 = Tk / (1 + beta * Tk)
   double enfriar(double T);
   // Criterio de aceptación (Δf, T) → bool
