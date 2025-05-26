@@ -1,5 +1,5 @@
 #pragma once
-#include "mh.h"
+#include "mhtrayectory.h"
 #include "mindiff.h"
 
 using namespace std;
@@ -11,7 +11,7 @@ using namespace std;
  *
  * @see MH
  */
-class GRASPNoBL : public MH {
+class GRASPNoBL : public MHTrayectory {
 public:
   GRASPNoBL();
   virtual ~GRASPNoBL();

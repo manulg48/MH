@@ -1,5 +1,5 @@
 #pragma once
-#include "mh.h"
+#include "mhtrayectory.h"
 #include "mindiff.h"
 #include "busquedalocal.h"
 
@@ -13,7 +13,7 @@ using namespace std;
  * @see MH
  * @see BusquedaLocal
  */
-class GRASPSiBL : public MH {
+class GRASPSiBL : public MHTrayectory {
 public:
   GRASPSiBL();
   virtual ~GRASPSiBL();

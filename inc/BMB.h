@@ -14,7 +14,7 @@ using namespace std;
  * @see MH
  * @see BusquedaLocal
  */
-class BMB : public MH {
+class BMB : public MHTrayectory {
 public:
   BMB();
   virtual ~BMB();
