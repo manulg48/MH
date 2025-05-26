@@ -12,7 +12,7 @@
 #include "util.h"
 #include "mindiff.h"
 #include "busquedalocal.h"
-
+#include "BMB.h"
 using namespace std;
 using namespace chrono;
 
@@ -96,7 +96,8 @@ int main(int argc, char *argv[]) {
     map<string, Resultado> tabla3;
 
     vector<pair<string, MH *>> algoritmos = {
-        {"LSrandom", new BusquedaLocal()}
+        {"LSrandom", new BusquedaLocal()},
+        {"BMB", new BMB()}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {

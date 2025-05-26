@@ -21,6 +21,8 @@ public:
 
   // Sólo necesita la interfaz global
   ResultMH optimize(Problem *problem, int maxevals) override;
+  ResultMH optimize(Problem *problem, const tSolution &current,
+                            tFitness fitness, int maxevals) override;
 
 private:
   int numRestarts;    // nº de arranques (p.ej. 10)

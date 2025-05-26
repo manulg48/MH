@@ -28,5 +28,29 @@ ResultMH BMB::optimize(Problem *problem, int maxevals) {
     }
   }
 
-  return ResultMH( sol ,  fit ,  evals );
+  return ResultMH( bestSol ,  bestFitness ,  evals );
+}
+
+ResultMH BMB::optimize(Problem *problem, const tSolution &current,tFitness fitness, int maxevals){
+  int evalPerRestart = maxevals / numRestarts;
+  double bestFitness = fitness;
+  tSolution bestSol = current;
+  unsigned totalEvals = 0;
+
+  for (int i = 0;i < numRestarts;i++){
+    tSolution sol = problem->createSolution();
+    tFitness fit = problem->fitness(sol);
+
+    ResultMH res = bl.optimize(problem,sol,fit,evalPerRestart);
+
+    totalEvals += res.evaluations;
+
+    if (res.fitness < bestFitness){
+      bestFitness = res.fitness;
+      bestSol = res.solution;
+    }
+  }
+
+  
+  return ResultMH(sol,fit,evals);
 }
