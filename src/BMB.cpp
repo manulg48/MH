@@ -2,14 +2,13 @@
 #include "BMB.h"
 
 BMB::BMB()
-  : numRestarts(10000),
+  : numRestarts(10),
     bl() 
 {}
 
 BMB::~BMB() {}
 
 ResultMH BMB::optimize(Problem *problem, int maxevals) {
-  int evalPerRestart = maxevals / numRestarts;
   double bestFitness = numeric_limits<double>::infinity();
   tSolution bestSol;
   unsigned totalEvals = 0;
@@ -18,7 +17,7 @@ ResultMH BMB::optimize(Problem *problem, int maxevals) {
     tSolution sol = problem->createSolution();
     tFitness fit = problem->fitness(sol);
 
-    ResultMH res = bl.optimize(problem,sol,fit,evalPerRestart);
+    ResultMH res = bl.optimize(problem,sol,fit,maxevals);
 
     totalEvals += res.evaluations;
 
@@ -28,7 +27,7 @@ ResultMH BMB::optimize(Problem *problem, int maxevals) {
     }
   }
 
-  return ResultMH( bestSol ,  bestFitness ,  evals );
+  return ResultMH( bestSol ,  bestFitness ,  totalEvals );
 }
 
 ResultMH BMB::optimize(Problem *problem, const tSolution &current,tFitness fitness, int maxevals){

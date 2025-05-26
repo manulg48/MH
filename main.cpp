@@ -13,6 +13,7 @@
 #include "mindiff.h"
 #include "busquedalocal.h"
 #include "BMB.h"
+#include "ILS.h"
 using namespace std;
 using namespace chrono;
 
@@ -97,7 +98,8 @@ int main(int argc, char *argv[]) {
 
     vector<pair<string, MH *>> algoritmos = {
         {"LSrandom", new BusquedaLocal()},
-        {"BMB", new BMB()}
+        {"BMB", new BMB()},
+        {"ILS", new ILS()}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {
