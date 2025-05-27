@@ -20,6 +20,7 @@
 #include "GRASP_SiBL.h"
 #include "GRASP_NoBL.h"
 #include "EnfriamientoSimulado.h"
+#include "ILS_ES.h"
 using namespace std;
 using namespace chrono;
 
@@ -112,6 +113,7 @@ int main(int argc, char *argv[]) {
         {"Mejor Práctica 2", new AM101},
         {"BMB",         new BMB()},
         {"ILS",         new ILS()},
+        {"ILS-ES", new ILS_ES},
         {"GRASP-SiBL",  new GRASPSiBL()},
         {"GRASP-NoBL", new GRASPNoBL()},
         {"ES", new EnfriamientoSimulado()}
