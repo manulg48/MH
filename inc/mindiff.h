@@ -50,6 +50,8 @@ class Mindiff : public Problem{
 
         double** getMatriz();
 
+        double getDistancia(int i, int j) override;
+
         std::vector<double>& getDistancias();
         /**
         *  Devuelve el tamañano del problema

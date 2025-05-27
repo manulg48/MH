@@ -74,7 +74,7 @@ using namespace std;
     }
 
     tFitness Mindiff::fitness(const tSolution &solution,SolutionFactoringInfo *solution_info,unsigned pos_change, tDomain new_value){
-
+        return 0;
     }
 
     tSolution Mindiff::createSolution(){
@@ -144,4 +144,11 @@ using namespace std;
 
     tFitness Mindiff::getCosteActual(){
         return costeActual;
+    }
+
+    double Mindiff::getDistancia(int i, int j){
+        if (i < j)
+            return matriz[i][j];
+        else
+            return matriz[j][i];
     }

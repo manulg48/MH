@@ -78,7 +78,8 @@ public:
                                            unsigned pos_change,
                                            tDomain new_value) {}
 
-  /**
+  virtual double getDistancia(int i, int j) = 0;
+                                           /**
    * Create a new solution.
    */
   virtual tSolution createSolution() = 0;

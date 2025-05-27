@@ -14,6 +14,8 @@
 #include "busquedalocal.h"
 #include "BMB.h"
 #include "ILS.h"
+#include "greedy.h"
+#include "memetic.h"
 using namespace std;
 using namespace chrono;
 
@@ -97,7 +99,9 @@ int main(int argc, char *argv[]) {
     map<string, Resultado> tabla3;
 
     vector<pair<string, MH *>> algoritmos = {
+        {"Greedy",new GreedySearch()},
         {"LSrandom", new BusquedaLocal()},
+        {"Mejor Pŕactica 2", new AM101},
         {"BMB", new BMB()},
         {"ILS", new ILS()}
     };
