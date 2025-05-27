@@ -32,3 +32,5 @@ private:
   tFitness fit;
   int evals;
 };
+
+tSolution construir(Problem *problem);

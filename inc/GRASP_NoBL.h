@@ -24,7 +24,5 @@ private:
   tSolution sol;
   tFitness fit;
   int evals;
-  
-  // Construye una solución parcial con LRC dinámico
-  tSolution construir(Problem *problem);
+
 };
