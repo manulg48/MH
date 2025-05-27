@@ -19,6 +19,10 @@ public:
   virtual ~GRASPSiBL();
 
   ResultMH optimize(Problem *problem, int maxevals) override;
+  ResultMH optimize(Problem *problem,
+                       const tSolution &current,
+                       tFitness fitness,
+                       int /*ignored*/) override;
 
 private:
   int numSolutions;    // p.ej. 10 iteraciones

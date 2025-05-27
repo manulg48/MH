@@ -16,6 +16,7 @@
 #include "ILS.h"
 #include "greedy.h"
 #include "memetic.h"
+#include "GRASP_SiBL.h"
 using namespace std;
 using namespace chrono;
 
@@ -103,7 +104,8 @@ int main(int argc, char *argv[]) {
         {"LSrandom", new BusquedaLocal()},
         {"Mejor Pŕactica 2", new AM101},
         {"BMB", new BMB()},
-        {"ILS", new ILS()}
+        {"ILS", new ILS()},
+        {"GRASP-SiBL",new GRASPSiBL()}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {
