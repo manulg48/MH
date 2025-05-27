@@ -18,6 +18,7 @@
 #include "greedy.h"
 #include "memetic.h"
 #include "GRASP_SiBL.h"
+#include "GRASP_NoBL.h"
 using namespace std;
 using namespace chrono;
 
@@ -110,7 +111,8 @@ int main(int argc, char *argv[]) {
         {"Mejor Práctica 2", new AM101},
         {"BMB",         new BMB()},
         {"ILS",         new ILS()},
-        {"GRASP-SiBL",  new GRASPSiBL()}
+        {"GRASP-SiBL",  new GRASPSiBL()},
+        {"GRASP-NoBL", new GRASPNoBL()}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {
