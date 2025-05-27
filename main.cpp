@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include <numeric>
+#include <limits>
 
 #include <random.hpp>
 #include "util.h"
@@ -22,18 +23,22 @@ using namespace chrono;
 
 // Struct para acumular resultados
 struct Resultado {
-    double desv_total = 0.0;
-    double tiempo_total = 0.0;
-    int contador = 0;
+    double desv_total    = 0.0;
+    double tiempo_total  = 0.0;
+    double evals_total   = 0.0;  // nuevo acumulador de evaluaciones
+    int    contador      = 0;
 
-    void agregar(double desv, double tiempo) {
-        desv_total += desv;
+    // ahora recibe 3 parámetros
+    void agregar(double desv, double tiempo, double evals) {
+        desv_total   += desv;
         tiempo_total += tiempo;
+        evals_total  += evals;
         contador++;
     }
 
-    double media_desv() const { return desv_total / contador; }
+    double media_desv() const { return desv_total   / contador; }
     double media_tiempo() const { return tiempo_total / contador; }
+    double media_evals() const { return evals_total   / contador; }
 };
 
 // Extrae el valor de n del nombre de archivo
@@ -96,109 +101,124 @@ int main(int argc, char *argv[]) {
     long int seed = (argc == 2) ? atoi(argv[1]) : 42;
 
     map<string, map<string, Resultado>> tabla1;
-    map<string, map<int, Resultado>> tabla2;
-    map<string, Resultado> tabla3;
+    map<string, map<int, Resultado>>     tabla2;
+    map<string, Resultado>               tabla3;
 
     vector<pair<string, MH *>> algoritmos = {
-        {"Greedy",new GreedySearch()},
-        {"LSrandom", new BusquedaLocal()},
-        {"Mejor Pŕactica 2", new AM101},
-        {"BMB", new BMB()},
-        {"ILS", new ILS()},
-        {"GRASP-SiBL",new GRASPSiBL()}
+        {"Greedy",      new GreedySearch()},
+        {"LSrandom",    new BusquedaLocal()},
+        {"Mejor Práctica 2", new AM101},
+        {"BMB",         new BMB()},
+        {"ILS",         new ILS()},
+        {"GRASP-SiBL",  new GRASPSiBL()}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {
         const auto& archivo = archivos[i];
         string nombre_archivo = archivo.substr(archivo.find_last_of("/") + 1);
-        if (mejores_valores.find(nombre_archivo) == mejores_valores.end()) continue;
-    
-        cout << "\n>>> Procesando caso " << i + 1 << "/" << archivos.size() << ": " << nombre_archivo << endl;
-    
+        if (mejores_valores.find(nombre_archivo) == mejores_valores.end())
+            continue;
+
+        cout << "\n>>> Procesando caso " << i+1 << "/"
+             << archivos.size() << ": " << nombre_archivo << endl;
+
         Mindiff problema(archivo);
         double valor_optimo = mejores_valores[nombre_archivo];
         int n = extraer_n(nombre_archivo);
-    
+
         for (auto& [nombre_algoritmo, algoritmo] : algoritmos) {
             int repeticiones = (nombre_algoritmo == "Greedy") ? 1 : 5;
-            vector<double> desv, tiempos;
-    
-            cout << "    -> Algoritmo: " << nombre_algoritmo << " (" << repeticiones << " rep)" << endl;
-    
-            for (int r = 0; r < repeticiones; r++) {
-                cout << "       --> Ejecución " << r + 1 << "... " << flush;
+            vector<double> desv, tiempos, iteraciones;
+
+            cout << "    -> Algoritmo: " << nombre_algoritmo
+                 << " (" << repeticiones << " rep)" << endl;
+
+            for (int r = 0; r < repeticiones; ++r) {
+                cout << "       --> Ejecución " << r+1 << "... " << flush;
                 Random::seed(seed + r);
                 auto start = high_resolution_clock::now();
-                ResultMH result = algoritmo->optimize(&problema, (nombre_algoritmo == "Greedy") ? 1 : 100000);
+                ResultMH result = algoritmo->optimize(
+                    &problema,
+                    (nombre_algoritmo == "Greedy") ? 1 : 100000
+                );
                 auto end = high_resolution_clock::now();
-    
+
                 double tiempo = duration_cast<milliseconds>(end - start).count();
                 double desviacion;
-    
                 if (result.fitness == 0.0) {
-                    if (valor_optimo == 0.0) {
-                        desviacion = 0.0;  // caso perfecto
-                    } else {
-                        desviacion = 100.0;  // fitness malo, óptimo no
-                        cerr << "[⚠️ WARNING] Fitness = 0, pero óptimo ≠ 0 en " << nombre_archivo
-                             << " con " << nombre_algoritmo << endl;
-                    }
+                    desviacion = (valor_optimo == 0.0) ? 0.0 : 100.0;
                 } else {
-                    desviacion = 100.0 * (result.fitness - valor_optimo) / result.fitness;
+                    desviacion = 100.0 * (result.fitness - valor_optimo)
+                                      / result.fitness;
                 }
-    
+
                 desv.push_back(desviacion);
                 tiempos.push_back(tiempo);
-    
-                cout << "OK (fitness = " << result.fitness
-                     << ", tiempo = " << tiempo << " ms"
-                     << ", desv = " << fixed << setprecision(2) << desviacion << "%)" << endl;
+                iteraciones.push_back(result.evaluations);
+
+                cout << "OK (fit=" << result.fitness
+                     << ", t=" << tiempo << "ms"
+                     << ", desv=" << fixed<<setprecision(2)
+                     << desviacion << "%, evals=" << result.evaluations
+                     << ")\n";
             }
-    
-            double media_desv = accumulate(desv.begin(), desv.end(), 0.0) / desv.size();
-            double media_tiempo = accumulate(tiempos.begin(), tiempos.end(), 0.0) / tiempos.size();
-    
-            tabla1[nombre_algoritmo][nombre_archivo].agregar(media_desv, media_tiempo);
-            tabla2[nombre_algoritmo][n].agregar(media_desv, media_tiempo);
-            tabla3[nombre_algoritmo].agregar(media_desv, media_tiempo);
-    
-            cout << "    -> Resultado medio: Desv = " << fixed << setprecision(2)
-                 << media_desv << "%, Tiempo = " << media_tiempo << " ms" << endl;
+
+            // calcular medias
+            double md = accumulate(desv.begin(), desv.end(), 0.0) /
+                        desv.size();
+            double mt = accumulate(tiempos.begin(), tiempos.end(), 0.0) /
+                        tiempos.size();
+            double me = accumulate(iteraciones.begin(), iteraciones.end(), 0.0) /
+                        iteraciones.size();
+
+            // agregar a las 3 tablas
+            tabla1[nombre_algoritmo][nombre_archivo].agregar(md, mt, me);
+            tabla2[nombre_algoritmo][n].agregar(md, mt, me);
+            tabla3[nombre_algoritmo].agregar(md, mt, me);
+
+            cout << "    -> Resultado medio: desv=" << fixed<<setprecision(2)
+                 << md << "%, t=" << mt << "ms, evals=" << me << "\n";
         }
     }
-    
-    
 
+    // Volcado tabla1
     ofstream f1("tabla1_resultados_por_caso.csv");
-f1 << "Algoritmo,Caso,Desv,Tiempo(ms)\n";
-
-for (const auto& [alg, casos] : tabla1) {
-    // Creamos un vector de pares y lo ordenamos por nombre de caso
-    vector<pair<string, Resultado>> casos_ordenados(casos.begin(), casos.end());
-    sort(casos_ordenados.begin(), casos_ordenados.end(),
-         [](const auto& a, const auto& b) {
-             return a.first < b.first;
-         });
-
-    for (const auto& [caso, r] : casos_ordenados) {
-        f1 << alg << "," << caso << "," << fixed << setprecision(2)
-           << r.media_desv() << "," << r.media_tiempo() << "\n";
+    f1 << "Algoritmo,Caso,Desv,Tiempo(ms),Evals\n";
+    for (const auto& [alg, casos] : tabla1) {
+        vector<pair<string, Resultado>> ord(casos.begin(), casos.end());
+        sort(ord.begin(), ord.end(),
+             [](auto &a, auto &b){ return a.first < b.first; });
+        for (auto& [caso, r] : ord) {
+            f1 << alg << "," << caso << ","
+               << fixed<<setprecision(2)<< r.media_desv()   << ","
+               <<             r.media_tiempo() << ","
+               <<             r.media_evals()  << "\n";
+        }
     }
-}
-f1.close();
+    f1.close();
 
-
+    // Volcado tabla2
     ofstream f2("tabla2_resultados_por_tamano.csv");
-    f2 << "Algoritmo,Tamano,Desv,Tiempo(ms)\n";
-    for (auto& [alg, tamanos] : tabla2)
-        for (auto& [tam, r] : tamanos)
-            f2 << alg << "," << tam << "," << fixed << setprecision(2) << r.media_desv() << "," << r.media_tiempo() << "\n";
+    f2 << "Algoritmo,Tamano,Desv,Tiempo(ms),Evals\n";
+    for (auto& [alg, tamanos] : tabla2) {
+        for (auto& [tam, r] : tamanos) {
+            f2 << alg << "," << tam << ","
+               << fixed<<setprecision(2)<< r.media_desv()   << ","
+               <<             r.media_tiempo() << ","
+               <<             r.media_evals()  << "\n";
+        }
+    }
     f2.close();
 
+    // Volcado tabla3
     ofstream f3("tabla3_resultados_globales.csv");
-    f3 << "Algoritmo,Desv,Tiempo(ms)\n";
-    for (auto& [alg, r] : tabla3)
-        f3 << alg << "," << fixed << setprecision(2) << r.media_desv() << "," << r.media_tiempo() << "\n";
+    f3 << "Algoritmo,Desv,Tiempo(ms),Evals\n";
+    for (auto& [alg, r] : tabla3) {
+        f3 << alg << ","
+           << fixed<<setprecision(2)<< r.media_desv()   << ","
+           <<             r.media_tiempo() << ","
+           <<             r.media_evals()  << "\n";
+    }
     f3.close();
 
     cout << "✅ Tablas generadas correctamente." << endl;
