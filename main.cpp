@@ -19,6 +19,7 @@
 #include "memetic.h"
 #include "GRASP_SiBL.h"
 #include "GRASP_NoBL.h"
+#include "EnfriamientoSimulado.h"
 using namespace std;
 using namespace chrono;
 
@@ -112,7 +113,8 @@ int main(int argc, char *argv[]) {
         {"BMB",         new BMB()},
         {"ILS",         new ILS()},
         {"GRASP-SiBL",  new GRASPSiBL()},
-        {"GRASP-NoBL", new GRASPNoBL()}
+        {"GRASP-NoBL", new GRASPNoBL()},
+        {"ES", new EnfriamientoSimulado()}
     };
 
     for (size_t i = 0; i < archivos.size(); ++i) {

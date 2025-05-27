@@ -1,42 +1,20 @@
+// EnfriamientoSimulado.h
 #pragma once
 #include "mhtrayectory.h"
-#include <mindiff.h>
+#include <vector>
 
-using namespace std;
-
-/**
- * Enfriamiento Simulado (ES)
- *  - Permite aceptar peores soluciones según una temperatura que disminuye
- *    siguiendo un esquema de Cauchy modificado.
- *
- * @see MHTrayectory
- * @see Problem
- */
 class EnfriamientoSimulado : public MHTrayectory {
 public:
-  EnfriamientoSimulado();
-  virtual ~EnfriamientoSimulado();
+    EnfriamientoSimulado();
+    ~EnfriamientoSimulado() override;
 
-  // Optimización global
-  ResultMH optimize(Problem *problem, int maxevals) override;
-  // Punto de entrada para llamada desde otra trayectoria o ILS
-  ResultMH optimize(Problem *problem,
-                    const tSolution &current,
-                    tFitness fitness,
-                    int maxevals) override;
-
+    // maxevals = 100000 en nuestras pruebas
+    ResultMH optimize(Problem *problem, int maxevals) override;
+ResultMH optimize(Problem *problem,
+                       const tSolution &current,
+                       tFitness fitness,
+                       int /*ignored*/) override {};
 private:
-  double T0;           // temperatura inicial
-  double Tf;           // temperatura final
-  double beta;         // parámetro de enfriamiento
-  int maxVecinos;      // número máximo de vecinos por temperatura
-  int maxExitos;       // número máximo de éxitos por temperatura
-
-  tSolution sol;
-  tFitness fit;
-  int evals;
-  // Esquema de enfriamiento: Tk+1 = Tk / (1 + beta * Tk)
-  double enfriar(double T);
-  // Criterio de aceptación (Δf, T) → bool
-  bool aceptar(tFitness delta, double T);
+    // Genera un vecino por intercambio brusco (mismas reglas que BL)
+    void vecino(const tSolution &orig, tSolution &mod);
 };
