@@ -192,7 +192,7 @@ int main(int argc, char *argv[]) {
             f1 << alg << "," << caso << ","
                << fixed<<setprecision(2)<< r.media_desv()   << ","
                <<             r.media_tiempo() << ","
-               <<             r.media_evals()  << "\n";
+               <<             static_cast<int>(std::round(r.media_evals()))  << "\n";
         }
     }
     f1.close();
@@ -205,7 +205,7 @@ int main(int argc, char *argv[]) {
             f2 << alg << "," << tam << ","
                << fixed<<setprecision(2)<< r.media_desv()   << ","
                <<             r.media_tiempo() << ","
-               <<             r.media_evals()  << "\n";
+               <<             static_cast<int>(std::round(r.media_evals()))  << "\n";
         }
     }
     f2.close();
@@ -217,7 +217,7 @@ int main(int argc, char *argv[]) {
         f3 << alg << ","
            << fixed<<setprecision(2)<< r.media_desv()   << ","
            <<             r.media_tiempo() << ","
-           <<             r.media_evals()  << "\n";
+           <<             static_cast<int>(std::round(r.media_evals())) << "\n";
     }
     f3.close();
 
