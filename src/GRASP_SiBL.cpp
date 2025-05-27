@@ -49,7 +49,7 @@ ResultMH GRASPSiBL::optimize(Problem *problem, int maxevals) {
 //    – LRC variable con umbral μ = dmin + α·(dmax−dmin), α=0.2 :contentReference[oaicite:3]{index=3}  
 //    – Repetir m-2 pasos más para completar la solución
 // ------------------------------------------------------------
-tSolution GRASPSiBL::construir(Problem *problem) {
+tSolution construir(Problem *problem) {
     int n = problem->getProblemSize();    // total de nodos
     int m = problem->getSolutionSize();   // nodos a escoger
     const double alpha = 0.2;             // umbral :contentReference[oaicite:4]{index=4}
@@ -114,12 +114,3 @@ tSolution GRASPSiBL::construir(Problem *problem) {
     return sol;
 }
 
-ResultMH optimize(Problem *problem,
-                       const tSolution &current,
-                       tFitness fitness,
-                       int /*ignored*/){
-                        tSolution bestSol;
-    tFitness  bestFit = std::numeric_limits<tFitness>::infinity();
-    int       totalEvals = 0;
-                        return ResultMH(bestSol, bestFit, totalEvals);
-                       } 

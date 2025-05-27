@@ -1,54 +1,104 @@
 Algoritmo,Caso,Desv,Tiempo(ms)
-BMB,GKD-b_10_n25_m7.txt,22.32,4.00
-BMB,GKD-b_11_n50_m5.txt,72.27,6.00
-BMB,GKD-b_12_n50_m5.txt,54.52,6.00
-BMB,GKD-b_13_n50_m5.txt,69.04,6.00
+BMB,GKD-b_10_n25_m7.txt,22.32,4.20
+BMB,GKD-b_11_n50_m5.txt,72.27,5.00
+BMB,GKD-b_12_n50_m5.txt,54.52,4.80
+BMB,GKD-b_13_n50_m5.txt,69.04,5.00
 BMB,GKD-b_14_n50_m5.txt,76.71,4.80
 BMB,GKD-b_15_n50_m5.txt,67.03,4.60
-BMB,GKD-b_16_n50_m15.txt,52.99,33.00
-BMB,GKD-b_17_n50_m15.txt,42.74,32.40
-BMB,GKD-b_18_n50_m15.txt,46.46,32.00
-BMB,GKD-b_19_n50_m15.txt,47.39,31.20
+BMB,GKD-b_16_n50_m15.txt,52.99,32.40
+BMB,GKD-b_17_n50_m15.txt,42.74,31.80
+BMB,GKD-b_18_n50_m15.txt,46.46,31.40
+BMB,GKD-b_19_n50_m15.txt,47.39,31.40
 BMB,GKD-b_1_n25_m2.txt,0.00,0.00
-BMB,GKD-b_20_n50_m15.txt,44.97,32.20
-BMB,GKD-b_21_n100_m10.txt,62.18,25.60
-BMB,GKD-b_22_n100_m10.txt,56.82,32.00
-BMB,GKD-b_23_n100_m10.txt,56.82,25.80
-BMB,GKD-b_24_n100_m10.txt,72.38,25.00
-BMB,GKD-b_25_n100_m10.txt,40.60,24.60
-BMB,GKD-b_26_n100_m30.txt,55.53,150.40
-BMB,GKD-b_27_n100_m30.txt,65.62,146.60
-BMB,GKD-b_28_n100_m30.txt,69.14,150.80
-BMB,GKD-b_29_n100_m30.txt,60.01,144.60
+BMB,GKD-b_20_n50_m15.txt,44.97,32.60
+BMB,GKD-b_21_n100_m10.txt,62.18,25.80
+BMB,GKD-b_22_n100_m10.txt,56.82,26.40
+BMB,GKD-b_23_n100_m10.txt,56.82,24.80
+BMB,GKD-b_24_n100_m10.txt,72.38,24.80
+BMB,GKD-b_25_n100_m10.txt,40.60,24.80
+BMB,GKD-b_26_n100_m30.txt,55.53,152.80
+BMB,GKD-b_27_n100_m30.txt,65.62,149.40
+BMB,GKD-b_28_n100_m30.txt,69.14,151.40
+BMB,GKD-b_29_n100_m30.txt,60.01,146.80
 BMB,GKD-b_2_n25_m2.txt,0.00,0.00
-BMB,GKD-b_30_n100_m30.txt,66.36,160.00
-BMB,GKD-b_31_n125_m12.txt,79.36,41.60
-BMB,GKD-b_32_n125_m12.txt,52.44,42.60
-BMB,GKD-b_33_n125_m12.txt,63.34,43.40
-BMB,GKD-b_34_n125_m12.txt,58.08,41.60
-BMB,GKD-b_35_n125_m12.txt,66.76,38.20
-BMB,GKD-b_36_n125_m37.txt,65.82,237.80
-BMB,GKD-b_37_n125_m37.txt,62.59,256.00
-BMB,GKD-b_38_n125_m37.txt,64.39,237.20
+BMB,GKD-b_30_n100_m30.txt,66.36,161.40
+BMB,GKD-b_31_n125_m12.txt,79.36,42.60
+BMB,GKD-b_32_n125_m12.txt,52.44,42.00
+BMB,GKD-b_33_n125_m12.txt,63.34,40.80
+BMB,GKD-b_34_n125_m12.txt,58.08,41.80
+BMB,GKD-b_35_n125_m12.txt,66.76,40.40
+BMB,GKD-b_36_n125_m37.txt,65.82,238.00
+BMB,GKD-b_37_n125_m37.txt,62.59,259.20
+BMB,GKD-b_38_n125_m37.txt,64.39,235.80
 BMB,GKD-b_39_n125_m37.txt,62.90,231.80
 BMB,GKD-b_3_n25_m2.txt,0.00,0.00
-BMB,GKD-b_40_n125_m37.txt,65.29,236.20
-BMB,GKD-b_41_n150_m15.txt,61.32,66.60
-BMB,GKD-b_42_n150_m15.txt,66.05,59.20
-BMB,GKD-b_43_n150_m15.txt,66.24,66.00
-BMB,GKD-b_44_n150_m15.txt,63.77,62.20
-BMB,GKD-b_45_n150_m15.txt,57.31,59.60
-BMB,GKD-b_46_n150_m45.txt,67.92,377.00
-BMB,GKD-b_47_n150_m45.txt,65.81,359.00
-BMB,GKD-b_48_n150_m45.txt,64.19,379.20
-BMB,GKD-b_49_n150_m45.txt,67.91,378.40
+BMB,GKD-b_40_n125_m37.txt,65.29,238.80
+BMB,GKD-b_41_n150_m15.txt,61.32,67.40
+BMB,GKD-b_42_n150_m15.txt,66.05,60.60
+BMB,GKD-b_43_n150_m15.txt,66.24,67.20
+BMB,GKD-b_44_n150_m15.txt,63.77,61.80
+BMB,GKD-b_45_n150_m15.txt,57.31,60.20
+BMB,GKD-b_46_n150_m45.txt,67.92,377.40
+BMB,GKD-b_47_n150_m45.txt,65.81,358.00
+BMB,GKD-b_48_n150_m45.txt,64.19,383.60
+BMB,GKD-b_49_n150_m45.txt,67.91,377.20
 BMB,GKD-b_4_n25_m2.txt,0.00,0.00
-BMB,GKD-b_50_n150_m45.txt,63.05,373.20
+BMB,GKD-b_50_n150_m45.txt,63.05,379.20
 BMB,GKD-b_5_n25_m2.txt,0.00,0.00
-BMB,GKD-b_6_n25_m7.txt,16.29,4.40
-BMB,GKD-b_7_n25_m7.txt,32.77,4.20
-BMB,GKD-b_8_n25_m7.txt,16.14,4.40
+BMB,GKD-b_6_n25_m7.txt,16.29,4.20
+BMB,GKD-b_7_n25_m7.txt,32.77,4.00
+BMB,GKD-b_8_n25_m7.txt,16.14,4.00
 BMB,GKD-b_9_n25_m7.txt,28.98,4.60
+GRASP-SiBL,GKD-b_10_n25_m7.txt,15.17,3.80
+GRASP-SiBL,GKD-b_11_n50_m5.txt,75.80,5.20
+GRASP-SiBL,GKD-b_12_n50_m5.txt,74.87,5.20
+GRASP-SiBL,GKD-b_13_n50_m5.txt,68.97,4.80
+GRASP-SiBL,GKD-b_14_n50_m5.txt,81.64,5.20
+GRASP-SiBL,GKD-b_15_n50_m5.txt,57.82,4.40
+GRASP-SiBL,GKD-b_16_n50_m15.txt,54.08,29.80
+GRASP-SiBL,GKD-b_17_n50_m15.txt,54.81,28.00
+GRASP-SiBL,GKD-b_18_n50_m15.txt,57.41,28.60
+GRASP-SiBL,GKD-b_19_n50_m15.txt,52.80,30.20
+GRASP-SiBL,GKD-b_1_n25_m2.txt,0.00,0.00
+GRASP-SiBL,GKD-b_20_n50_m15.txt,42.83,29.80
+GRASP-SiBL,GKD-b_21_n100_m10.txt,61.33,23.80
+GRASP-SiBL,GKD-b_22_n100_m10.txt,62.57,25.20
+GRASP-SiBL,GKD-b_23_n100_m10.txt,66.32,22.00
+GRASP-SiBL,GKD-b_24_n100_m10.txt,75.17,25.80
+GRASP-SiBL,GKD-b_25_n100_m10.txt,55.60,24.80
+GRASP-SiBL,GKD-b_26_n100_m30.txt,54.50,121.80
+GRASP-SiBL,GKD-b_27_n100_m30.txt,67.60,116.00
+GRASP-SiBL,GKD-b_28_n100_m30.txt,57.86,129.60
+GRASP-SiBL,GKD-b_29_n100_m30.txt,57.67,124.80
+GRASP-SiBL,GKD-b_2_n25_m2.txt,0.00,0.00
+GRASP-SiBL,GKD-b_30_n100_m30.txt,62.01,120.40
+GRASP-SiBL,GKD-b_31_n125_m12.txt,72.54,37.00
+GRASP-SiBL,GKD-b_32_n125_m12.txt,59.78,34.80
+GRASP-SiBL,GKD-b_33_n125_m12.txt,64.95,38.00
+GRASP-SiBL,GKD-b_34_n125_m12.txt,63.12,35.00
+GRASP-SiBL,GKD-b_35_n125_m12.txt,69.81,32.20
+GRASP-SiBL,GKD-b_36_n125_m37.txt,72.34,168.80
+GRASP-SiBL,GKD-b_37_n125_m37.txt,68.86,198.80
+GRASP-SiBL,GKD-b_38_n125_m37.txt,61.62,179.80
+GRASP-SiBL,GKD-b_39_n125_m37.txt,67.21,187.80
+GRASP-SiBL,GKD-b_3_n25_m2.txt,0.00,0.00
+GRASP-SiBL,GKD-b_40_n125_m37.txt,61.44,189.00
+GRASP-SiBL,GKD-b_41_n150_m15.txt,66.69,56.00
+GRASP-SiBL,GKD-b_42_n150_m15.txt,72.69,58.20
+GRASP-SiBL,GKD-b_43_n150_m15.txt,68.09,54.00
+GRASP-SiBL,GKD-b_44_n150_m15.txt,66.39,56.40
+GRASP-SiBL,GKD-b_45_n150_m15.txt,65.00,47.40
+GRASP-SiBL,GKD-b_46_n150_m45.txt,68.76,294.80
+GRASP-SiBL,GKD-b_47_n150_m45.txt,63.30,246.20
+GRASP-SiBL,GKD-b_48_n150_m45.txt,58.78,281.20
+GRASP-SiBL,GKD-b_49_n150_m45.txt,68.20,280.80
+GRASP-SiBL,GKD-b_4_n25_m2.txt,0.00,0.00
+GRASP-SiBL,GKD-b_50_n150_m45.txt,66.35,284.00
+GRASP-SiBL,GKD-b_5_n25_m2.txt,0.00,0.00
+GRASP-SiBL,GKD-b_6_n25_m7.txt,40.02,4.20
+GRASP-SiBL,GKD-b_7_n25_m7.txt,29.46,3.80
+GRASP-SiBL,GKD-b_8_n25_m7.txt,30.75,4.20
+GRASP-SiBL,GKD-b_9_n25_m7.txt,11.55,3.80
 Greedy,GKD-b_10_n25_m7.txt,81.03,0.00
 Greedy,GKD-b_11_n50_m5.txt,96.85,0.00
 Greedy,GKD-b_12_n50_m5.txt,96.62,0.00
@@ -99,103 +149,153 @@ Greedy,GKD-b_6_n25_m7.txt,92.62,0.00
 Greedy,GKD-b_7_n25_m7.txt,85.69,0.00
 Greedy,GKD-b_8_n25_m7.txt,86.22,0.00
 Greedy,GKD-b_9_n25_m7.txt,74.10,0.00
-ILS,GKD-b_10_n25_m7.txt,13.31,4.20
+ILS,GKD-b_10_n25_m7.txt,13.31,4.40
 ILS,GKD-b_11_n50_m5.txt,71.42,4.60
-ILS,GKD-b_12_n50_m5.txt,67.42,4.80
+ILS,GKD-b_12_n50_m5.txt,67.42,4.60
 ILS,GKD-b_13_n50_m5.txt,68.74,5.00
-ILS,GKD-b_14_n50_m5.txt,69.85,5.20
+ILS,GKD-b_14_n50_m5.txt,69.85,4.60
 ILS,GKD-b_15_n50_m5.txt,67.33,4.80
 ILS,GKD-b_16_n50_m15.txt,47.97,28.20
-ILS,GKD-b_17_n50_m15.txt,33.48,29.40
-ILS,GKD-b_18_n50_m15.txt,41.20,29.80
-ILS,GKD-b_19_n50_m15.txt,46.93,30.60
+ILS,GKD-b_17_n50_m15.txt,33.48,29.20
+ILS,GKD-b_18_n50_m15.txt,41.20,29.00
+ILS,GKD-b_19_n50_m15.txt,46.93,27.60
 ILS,GKD-b_1_n25_m2.txt,0.00,0.00
 ILS,GKD-b_20_n50_m15.txt,35.30,28.80
 ILS,GKD-b_21_n100_m10.txt,56.61,22.20
-ILS,GKD-b_22_n100_m10.txt,57.36,24.80
+ILS,GKD-b_22_n100_m10.txt,57.36,21.80
 ILS,GKD-b_23_n100_m10.txt,58.07,21.60
-ILS,GKD-b_24_n100_m10.txt,72.49,22.40
-ILS,GKD-b_25_n100_m10.txt,43.74,21.80
-ILS,GKD-b_26_n100_m30.txt,49.17,125.80
-ILS,GKD-b_27_n100_m30.txt,58.45,132.40
-ILS,GKD-b_28_n100_m30.txt,65.57,135.40
-ILS,GKD-b_29_n100_m30.txt,57.97,123.40
+ILS,GKD-b_24_n100_m10.txt,72.49,23.00
+ILS,GKD-b_25_n100_m10.txt,43.74,22.60
+ILS,GKD-b_26_n100_m30.txt,49.17,126.20
+ILS,GKD-b_27_n100_m30.txt,58.45,133.60
+ILS,GKD-b_28_n100_m30.txt,65.57,135.80
+ILS,GKD-b_29_n100_m30.txt,57.97,124.00
 ILS,GKD-b_2_n25_m2.txt,0.00,0.00
-ILS,GKD-b_30_n100_m30.txt,62.18,133.80
+ILS,GKD-b_30_n100_m30.txt,62.18,132.20
 ILS,GKD-b_31_n125_m12.txt,74.46,33.00
-ILS,GKD-b_32_n125_m12.txt,48.82,33.00
-ILS,GKD-b_33_n125_m12.txt,55.78,35.00
-ILS,GKD-b_34_n125_m12.txt,51.08,37.80
-ILS,GKD-b_35_n125_m12.txt,57.90,32.80
-ILS,GKD-b_36_n125_m37.txt,59.76,186.80
-ILS,GKD-b_37_n125_m37.txt,57.80,215.80
-ILS,GKD-b_38_n125_m37.txt,64.33,184.60
-ILS,GKD-b_39_n125_m37.txt,58.23,214.40
+ILS,GKD-b_32_n125_m12.txt,48.82,32.40
+ILS,GKD-b_33_n125_m12.txt,55.78,33.40
+ILS,GKD-b_34_n125_m12.txt,51.08,34.40
+ILS,GKD-b_35_n125_m12.txt,57.90,33.20
+ILS,GKD-b_36_n125_m37.txt,59.76,188.40
+ILS,GKD-b_37_n125_m37.txt,57.80,212.20
+ILS,GKD-b_38_n125_m37.txt,64.33,183.60
+ILS,GKD-b_39_n125_m37.txt,58.23,214.20
 ILS,GKD-b_3_n25_m2.txt,0.00,0.00
-ILS,GKD-b_40_n125_m37.txt,58.62,212.20
-ILS,GKD-b_41_n150_m15.txt,59.38,55.60
-ILS,GKD-b_42_n150_m15.txt,64.24,51.00
+ILS,GKD-b_40_n125_m37.txt,58.62,213.60
+ILS,GKD-b_41_n150_m15.txt,59.38,56.00
+ILS,GKD-b_42_n150_m15.txt,64.24,52.00
 ILS,GKD-b_43_n150_m15.txt,65.11,49.80
-ILS,GKD-b_44_n150_m15.txt,65.61,49.00
+ILS,GKD-b_44_n150_m15.txt,65.61,49.60
 ILS,GKD-b_45_n150_m15.txt,62.90,50.80
-ILS,GKD-b_46_n150_m45.txt,63.20,290.60
-ILS,GKD-b_47_n150_m45.txt,61.21,294.00
+ILS,GKD-b_46_n150_m45.txt,63.20,291.20
+ILS,GKD-b_47_n150_m45.txt,61.21,294.60
 ILS,GKD-b_48_n150_m45.txt,59.11,337.60
-ILS,GKD-b_49_n150_m45.txt,64.10,312.80
+ILS,GKD-b_49_n150_m45.txt,64.10,313.00
 ILS,GKD-b_4_n25_m2.txt,0.00,0.00
-ILS,GKD-b_50_n150_m45.txt,59.10,329.00
+ILS,GKD-b_50_n150_m45.txt,59.10,330.00
 ILS,GKD-b_5_n25_m2.txt,0.00,0.00
-ILS,GKD-b_6_n25_m7.txt,15.16,4.20
-ILS,GKD-b_7_n25_m7.txt,30.23,4.00
+ILS,GKD-b_6_n25_m7.txt,15.16,3.80
+ILS,GKD-b_7_n25_m7.txt,30.23,3.80
 ILS,GKD-b_8_n25_m7.txt,26.42,4.00
 ILS,GKD-b_9_n25_m7.txt,27.42,4.20
 LSrandom,GKD-b_10_n25_m7.txt,46.92,0.00
 LSrandom,GKD-b_11_n50_m5.txt,84.72,0.00
 LSrandom,GKD-b_12_n50_m5.txt,85.17,0.00
-LSrandom,GKD-b_13_n50_m5.txt,82.12,0.00
+LSrandom,GKD-b_13_n50_m5.txt,82.12,0.20
 LSrandom,GKD-b_14_n50_m5.txt,90.64,0.00
 LSrandom,GKD-b_15_n50_m5.txt,80.57,0.00
-LSrandom,GKD-b_16_n50_m15.txt,62.33,5.80
-LSrandom,GKD-b_17_n50_m15.txt,48.78,5.80
+LSrandom,GKD-b_16_n50_m15.txt,62.33,5.20
+LSrandom,GKD-b_17_n50_m15.txt,48.78,5.60
 LSrandom,GKD-b_18_n50_m15.txt,49.52,6.40
-LSrandom,GKD-b_19_n50_m15.txt,54.58,7.20
+LSrandom,GKD-b_19_n50_m15.txt,54.58,6.60
 LSrandom,GKD-b_1_n25_m2.txt,0.00,0.00
 LSrandom,GKD-b_20_n50_m15.txt,45.84,7.00
-LSrandom,GKD-b_21_n100_m10.txt,67.47,5.80
-LSrandom,GKD-b_22_n100_m10.txt,66.63,6.20
+LSrandom,GKD-b_21_n100_m10.txt,67.47,6.20
+LSrandom,GKD-b_22_n100_m10.txt,66.63,5.40
 LSrandom,GKD-b_23_n100_m10.txt,58.70,5.00
-LSrandom,GKD-b_24_n100_m10.txt,75.17,4.80
+LSrandom,GKD-b_24_n100_m10.txt,75.17,4.40
 LSrandom,GKD-b_25_n100_m10.txt,49.88,4.80
-LSrandom,GKD-b_26_n100_m30.txt,45.13,89.60
-LSrandom,GKD-b_27_n100_m30.txt,59.95,135.20
-LSrandom,GKD-b_28_n100_m30.txt,71.01,88.80
-LSrandom,GKD-b_29_n100_m30.txt,60.13,84.20
+LSrandom,GKD-b_26_n100_m30.txt,45.13,87.60
+LSrandom,GKD-b_27_n100_m30.txt,59.95,133.20
+LSrandom,GKD-b_28_n100_m30.txt,71.01,83.80
+LSrandom,GKD-b_29_n100_m30.txt,60.13,84.00
 LSrandom,GKD-b_2_n25_m2.txt,0.00,0.00
-LSrandom,GKD-b_30_n100_m30.txt,55.15,108.20
-LSrandom,GKD-b_31_n125_m12.txt,70.19,19.40
+LSrandom,GKD-b_30_n100_m30.txt,55.15,106.00
+LSrandom,GKD-b_31_n125_m12.txt,70.19,18.40
 LSrandom,GKD-b_32_n125_m12.txt,59.42,9.40
-LSrandom,GKD-b_33_n125_m12.txt,59.06,12.00
-LSrandom,GKD-b_34_n125_m12.txt,58.30,10.80
-LSrandom,GKD-b_35_n125_m12.txt,71.27,12.60
-LSrandom,GKD-b_36_n125_m37.txt,58.09,212.00
-LSrandom,GKD-b_37_n125_m37.txt,55.37,345.60
-LSrandom,GKD-b_38_n125_m37.txt,61.14,196.80
-LSrandom,GKD-b_39_n125_m37.txt,60.29,219.80
+LSrandom,GKD-b_33_n125_m12.txt,59.06,11.20
+LSrandom,GKD-b_34_n125_m12.txt,58.30,10.60
+LSrandom,GKD-b_35_n125_m12.txt,71.27,10.80
+LSrandom,GKD-b_36_n125_m37.txt,58.09,208.60
+LSrandom,GKD-b_37_n125_m37.txt,55.37,339.20
+LSrandom,GKD-b_38_n125_m37.txt,61.14,186.40
+LSrandom,GKD-b_39_n125_m37.txt,60.29,212.40
 LSrandom,GKD-b_3_n25_m2.txt,0.00,0.00
-LSrandom,GKD-b_40_n125_m37.txt,54.39,212.40
-LSrandom,GKD-b_41_n150_m15.txt,59.51,22.60
-LSrandom,GKD-b_42_n150_m15.txt,54.51,23.20
-LSrandom,GKD-b_43_n150_m15.txt,52.63,28.60
-LSrandom,GKD-b_44_n150_m15.txt,53.66,24.40
+LSrandom,GKD-b_40_n125_m37.txt,54.39,206.40
+LSrandom,GKD-b_41_n150_m15.txt,59.51,22.20
+LSrandom,GKD-b_42_n150_m15.txt,54.51,23.40
+LSrandom,GKD-b_43_n150_m15.txt,52.63,26.60
+LSrandom,GKD-b_44_n150_m15.txt,53.66,21.80
 LSrandom,GKD-b_45_n150_m15.txt,41.83,20.00
-LSrandom,GKD-b_46_n150_m45.txt,54.02,478.60
-LSrandom,GKD-b_47_n150_m45.txt,44.39,444.60
-LSrandom,GKD-b_48_n150_m45.txt,52.56,452.80
-LSrandom,GKD-b_49_n150_m45.txt,56.32,295.60
+LSrandom,GKD-b_46_n150_m45.txt,54.02,467.40
+LSrandom,GKD-b_47_n150_m45.txt,44.39,437.00
+LSrandom,GKD-b_48_n150_m45.txt,52.56,437.20
+LSrandom,GKD-b_49_n150_m45.txt,56.32,290.40
 LSrandom,GKD-b_4_n25_m2.txt,0.00,0.00
-LSrandom,GKD-b_50_n150_m45.txt,54.39,497.00
+LSrandom,GKD-b_50_n150_m45.txt,54.39,484.80
 LSrandom,GKD-b_5_n25_m2.txt,0.00,0.00
 LSrandom,GKD-b_6_n25_m7.txt,38.19,0.00
 LSrandom,GKD-b_7_n25_m7.txt,61.14,0.00
-LSrandom,GKD-b_8_n25_m7.txt,58.55,0.00
-LSrandom,GKD-b_9_n25_m7.txt,55.17,0.00
+LSrandom,GKD-b_8_n25_m7.txt,58.55,0.20
+LSrandom,GKD-b_9_n25_m7.txt,55.17,0.20
+Mejor Pŕactica 2,GKD-b_10_n25_m7.txt,9.83,199.80
+Mejor Pŕactica 2,GKD-b_11_n50_m5.txt,63.37,166.40
+Mejor Pŕactica 2,GKD-b_12_n50_m5.txt,44.32,165.40
+Mejor Pŕactica 2,GKD-b_13_n50_m5.txt,63.75,164.20
+Mejor Pŕactica 2,GKD-b_14_n50_m5.txt,71.30,165.20
+Mejor Pŕactica 2,GKD-b_15_n50_m5.txt,53.28,166.40
+Mejor Pŕactica 2,GKD-b_16_n50_m15.txt,24.95,398.40
+Mejor Pŕactica 2,GKD-b_17_n50_m15.txt,23.40,407.40
+Mejor Pŕactica 2,GKD-b_18_n50_m15.txt,23.75,401.80
+Mejor Pŕactica 2,GKD-b_19_n50_m15.txt,25.63,401.20
+Mejor Pŕactica 2,GKD-b_1_n25_m2.txt,0.00,260.20
+Mejor Pŕactica 2,GKD-b_20_n50_m15.txt,21.22,407.00
+Mejor Pŕactica 2,GKD-b_21_n100_m10.txt,48.46,252.60
+Mejor Pŕactica 2,GKD-b_22_n100_m10.txt,41.37,240.40
+Mejor Pŕactica 2,GKD-b_23_n100_m10.txt,43.74,245.20
+Mejor Pŕactica 2,GKD-b_24_n100_m10.txt,64.86,257.20
+Mejor Pŕactica 2,GKD-b_25_n100_m10.txt,31.37,246.60
+Mejor Pŕactica 2,GKD-b_26_n100_m30.txt,34.43,1448.40
+Mejor Pŕactica 2,GKD-b_27_n100_m30.txt,46.30,1442.60
+Mejor Pŕactica 2,GKD-b_28_n100_m30.txt,55.77,1483.60
+Mejor Pŕactica 2,GKD-b_29_n100_m30.txt,37.54,1418.00
+Mejor Pŕactica 2,GKD-b_2_n25_m2.txt,0.00,257.60
+Mejor Pŕactica 2,GKD-b_30_n100_m30.txt,54.83,1391.00
+Mejor Pŕactica 2,GKD-b_31_n125_m12.txt,54.09,380.80
+Mejor Pŕactica 2,GKD-b_32_n125_m12.txt,43.63,330.80
+Mejor Pŕactica 2,GKD-b_33_n125_m12.txt,45.74,335.80
+Mejor Pŕactica 2,GKD-b_34_n125_m12.txt,44.03,322.60
+Mejor Pŕactica 2,GKD-b_35_n125_m12.txt,43.63,345.00
+Mejor Pŕactica 2,GKD-b_36_n125_m37.txt,51.69,2141.20
+Mejor Pŕactica 2,GKD-b_37_n125_m37.txt,50.58,2214.80
+Mejor Pŕactica 2,GKD-b_38_n125_m37.txt,50.80,2183.40
+Mejor Pŕactica 2,GKD-b_39_n125_m37.txt,52.43,2104.60
+Mejor Pŕactica 2,GKD-b_3_n25_m2.txt,0.00,257.20
+Mejor Pŕactica 2,GKD-b_40_n125_m37.txt,54.11,2142.60
+Mejor Pŕactica 2,GKD-b_41_n150_m15.txt,51.42,509.20
+Mejor Pŕactica 2,GKD-b_42_n150_m15.txt,46.99,515.80
+Mejor Pŕactica 2,GKD-b_43_n150_m15.txt,44.65,479.40
+Mejor Pŕactica 2,GKD-b_44_n150_m15.txt,42.04,480.20
+Mejor Pŕactica 2,GKD-b_45_n150_m15.txt,44.29,454.80
+Mejor Pŕactica 2,GKD-b_46_n150_m45.txt,57.30,3115.80
+Mejor Pŕactica 2,GKD-b_47_n150_m45.txt,42.83,3417.00
+Mejor Pŕactica 2,GKD-b_48_n150_m45.txt,45.57,3378.00
+Mejor Pŕactica 2,GKD-b_49_n150_m45.txt,53.92,3409.40
+Mejor Pŕactica 2,GKD-b_4_n25_m2.txt,0.00,257.40
+Mejor Pŕactica 2,GKD-b_50_n150_m45.txt,49.51,3183.40
+Mejor Pŕactica 2,GKD-b_5_n25_m2.txt,0.00,257.00
+Mejor Pŕactica 2,GKD-b_6_n25_m7.txt,6.75,197.80
+Mejor Pŕactica 2,GKD-b_7_n25_m7.txt,10.85,198.20
+Mejor Pŕactica 2,GKD-b_8_n25_m7.txt,4.64,196.60
+Mejor Pŕactica 2,GKD-b_9_n25_m7.txt,14.95,195.80

@@ -1,5 +1,7 @@
 Algoritmo,Desv,Tiempo(ms)
-BMB,51.61,93.64
+BMB,51.61,93.94
+GRASP-SiBL,53.89,73.71
 Greedy,77.76,0.00
-ILS,49.09,79.22
-LSrandom,53.70,82.06
+ILS,49.09,79.05
+LSrandom,53.70,79.92
+Mejor Pŕactica 2,37.80,899.82

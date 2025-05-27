@@ -22,7 +22,7 @@ public:
   ResultMH optimize(Problem *problem,
                        const tSolution &current,
                        tFitness fitness,
-                       int /*ignored*/) override;
+                       int /*ignored*/) override {};
 
 private:
   int numSolutions;    // p.ej. 10 iteraciones
@@ -31,5 +31,4 @@ private:
   tSolution sol;
   tFitness fit;
   int evals;
-  tSolution construir(Problem *problem);
 };
