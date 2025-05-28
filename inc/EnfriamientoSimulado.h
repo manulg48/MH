@@ -13,7 +13,7 @@ public:
 ResultMH optimize(Problem *problem,
                        const tSolution &current,
                        tFitness fitness,
-                       int /*ignored*/) override {};
+                       int /*ignored*/) override;
 private:
     // Genera un vecino por intercambio brusco (mismas reglas que BL)
     void vecino(const tSolution &orig, tSolution &mod);

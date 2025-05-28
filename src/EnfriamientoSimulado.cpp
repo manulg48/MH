@@ -76,6 +76,84 @@ ResultMH EnfriamientoSimulado::optimize(Problem *problem, int maxevals) {
     return ResultMH(bestSol, bestFit, evals);
 }
 
+ResultMH EnfriamientoSimulado::optimize(Problem *problem,
+                                        const tSolution &current,
+                                        tFitness fitness,
+                                        int /*ignored*/) {
+    // 1) Partimos de la solución y fitness recibidos
+    tSolution sol     = current;
+    tFitness  fit     = fitness;
+    int       evals   = 0;               // contaremos sólo las evaluaciones internas
+
+    // 2) Mejor global hasta el momento
+    tSolution bestSol = sol;
+    tFitness  bestFit = fit;
+
+    // 3) Parámetros de enfriamiento (Seminario 4)
+    const double phi           = 0.3;
+    const double mu            = 0.2;
+    const double Tf            = 1e-3;                    // temp. final :contentReference[oaicite:0]{index=0}
+    int          m             = problem->getSolutionSize();
+    int          max_vecinos   = 100 * m;                // L(T) :contentReference[oaicite:1]{index=1}
+    int          max_exitos    = std::max(1, max_vecinos/10);
+    const int    maxEvalsSA    = 10000;                   // tope por llamada :contentReference[oaicite:2]{index=2}
+
+    // 3.1) nº de niveles de temperatura M ≃ maxEvalsSA / max_vecinos
+    int M = int(std::ceil(double(maxEvalsSA) / max_vecinos));
+
+    // 3.2) Temperatura inicial: T0 = μ·fit/(-ln φ)
+    double T0 = mu * fit / (-std::log(phi));
+    if (T0 <= Tf) T0 = Tf * 10.0;
+
+    // 3.3) Parámetro β para el esquema de Cauchy modificado
+    double beta = (T0 - Tf) / (M * T0 * Tf);
+
+    double T = T0;
+
+    // 4) Bucle externo: niveles de temperatura
+    for (int k = 0; k < M && evals < maxEvalsSA; ++k) {
+        int n_vec = 0, n_ex = 0;
+
+        // 4.1) Bucle interno L(T): hasta max_vecinos, max_exitos o maxEvalsSA
+        while (n_vec < max_vecinos && n_ex < max_exitos && evals < maxEvalsSA) {
+            // 4.1.1) Generar vecino
+            tSolution cand;
+            vecino(sol, cand);
+
+            // 4.1.2) Evaluar
+            tFitness fit2 = problem->fitness(cand);
+            ++evals;
+            ++n_vec;
+
+            // 4.1.3) Criterio de Metropolis
+            double delta = fit2 - fit;  // minimizamos
+            double prob  = std::exp(-delta / T);
+            if (delta <= 0.0 ||
+                std::uniform_real_distribution<>(0.0,1.0)(Random::engine()) < prob) {
+                sol = cand;
+                fit = fit2;
+                ++n_ex;
+
+                // 4.1.4) Actualizar mejor global
+                if (fit2 < bestFit) {
+                    bestFit = fit2;
+                    bestSol = cand;
+                }
+            }
+        }
+
+        // 4.2) Si no hubo éxitos, rompemos
+        if (n_ex == 0) break;
+
+        // 4.3) Enfriamiento por Cauchy modificado
+        T = T / (1.0 + beta * T);
+        if (T < Tf) break;
+    }
+
+    return ResultMH(bestSol, bestFit, evals);
+}
+
+
 void EnfriamientoSimulado::vecino(const tSolution &orig, tSolution &mod) {
     // Igual que en BL: intercambiamos un 1 por un 0 al azar
     mod = orig;
